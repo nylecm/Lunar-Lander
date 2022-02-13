@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
         curPos = rb2.position;
         prevPos = curPos;
         velocity = new Vector2();
-        velocity.x += 1.5f;
+        velocity.x += 1.2f;
         rb2.velocity = velocity;
     }
 
@@ -43,12 +43,7 @@ public class Player : MonoBehaviour
 
     private void AddThrust()
     {
-        // todo have direction of lander determine :
-
-        // Calculate heading of lander:
-        
-
-        float speed = 0.007f;
+        float speed = 0.009f;
         bool posAngle = (curAngle > 0);
         velocity = rb2.velocity;
 
@@ -92,7 +87,7 @@ public class Player : MonoBehaviour
             return;
         } 
         
-        rb2.transform.Rotate(0, 0, -0.12f, Space.Self);
+        rb2.transform.Rotate(0, 0, -0.16f, Space.Self);
         curAngle -= 0.12f;
         Debug.Log(curAngle);
         //}
@@ -109,7 +104,7 @@ public class Player : MonoBehaviour
             return;
         } 
         
-        rb2.transform.Rotate(0, 0, 0.12f, Space.Self);
+        rb2.transform.Rotate(0, 0, 0.16f, Space.Self);
         curAngle += 0.12f;
         Debug.Log(curAngle);
 

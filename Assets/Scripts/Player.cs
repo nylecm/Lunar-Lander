@@ -17,8 +17,9 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         rb2 = GetComponent<Rigidbody2D>();
+        rb2.gravityScale = 0.3f;
         velocity = new Vector2();
-        velocity.x += 2.0f;
+        velocity.x += 1.5f;
         rb2.velocity = velocity;
     }
 
@@ -28,13 +29,15 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W)) AddThrust(); 
         if (Input.GetKeyDown(KeyCode.A)) RotateCW(); 
         if (Input.GetKeyDown(KeyCode.D)) RotateACW();
+        rb2.transform.Rotate(0, 0, 0.1f, Space.Self);
+
     }
 
     private void AddThrust()
     {
         // In the direction currently pointed at add thrust:
         velocity = rb2.velocity;
-        velocity.y += 2;
+        velocity.y += 1;
         rb2.velocity = velocity;
         //rb2.velocity.x = velocityX;
     }

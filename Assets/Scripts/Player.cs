@@ -46,21 +46,22 @@ public class Player : MonoBehaviour
         // todo have direction of lander determine :
 
         // Calculate heading of lander:
+        
 
-        float speed = 0.5f;
+        float speed = 0.007f;
         bool posAngle = (curAngle > 0);
         velocity = rb2.velocity;
 
         if (posAngle)
         {
-            velocity.y = (float) Math.Cos(ConvertToRadians(curAngle)) * speed;
-            velocity.x = (float) -(Math.Sin(ConvertToRadians(curAngle)) * speed);
+            velocity.y += (float) Math.Cos(ConvertToRadians(curAngle)) * speed;
+            velocity.x += (float) -(Math.Sin(ConvertToRadians(curAngle)) * speed);
 
         }
         else
         {
-            velocity.y = (float) (Math.Cos(ConvertToRadians(-curAngle)) * speed);
-            velocity.x = (float) (Math.Sin(ConvertToRadians(-curAngle)) * speed);
+            velocity.y += (float) (Math.Cos(ConvertToRadians(-curAngle)) * speed);
+            velocity.x += (float) (Math.Sin(ConvertToRadians(-curAngle)) * speed);
 
         }
 
@@ -86,6 +87,11 @@ public class Player : MonoBehaviour
         // Debug.Log(rb2.transform.rotation.z);
         // if (rb2.transform.rotation.z > -0.5) // todo fix
         // {
+        if (curAngle < -90)
+        {
+            return;
+        } 
+        
         rb2.transform.Rotate(0, 0, -0.12f, Space.Self);
         curAngle -= 0.12f;
         Debug.Log(curAngle);
@@ -98,6 +104,11 @@ public class Player : MonoBehaviour
     {
         //if (rb2.transform.rotation.z < 0.5) // todo fix
         //{
+        if (curAngle > 90)
+        {
+            return;
+        } 
+        
         rb2.transform.Rotate(0, 0, 0.12f, Space.Self);
         curAngle += 0.12f;
         Debug.Log(curAngle);

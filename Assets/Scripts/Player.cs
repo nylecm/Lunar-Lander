@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore;
 
 public class Player : MonoBehaviour
 {
@@ -46,14 +47,31 @@ public class Player : MonoBehaviour
 
         // Calculate heading of lander:
 
-        float angle = curAngle;
-
+        float speed = 0.5f;
+        bool posAngle = (curAngle > 0);
         velocity = rb2.velocity;
-        velocity.y = (float) Math.Cos(angle) * 0.30f;
-        velocity.x = (float) Math.Sin(angle) * 0.30f;
+
+        if (posAngle)
+        {
+            velocity.y = (float) Math.Cos(ConvertToRadians(curAngle)) * speed;
+            velocity.x = (float) -(Math.Sin(ConvertToRadians(curAngle)) * speed);
+
+        }
+        else
+        {
+            velocity.y = (float) (Math.Cos(ConvertToRadians(-curAngle)) * speed);
+            velocity.x = (float) (Math.Sin(ConvertToRadians(-curAngle)) * speed);
+
+        }
+
         //velocity.y += 0.01f;
         rb2.velocity = velocity;
         //rb2.velocity.x = velocityX;
+    }
+    
+    public double ConvertToRadians(double angle)
+    {
+        return (Math.PI / 180) * angle;
     }
 
     // private void RotateCW()

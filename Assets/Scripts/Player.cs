@@ -18,42 +18,44 @@ public class Player : MonoBehaviour
     {
         rb2 = GetComponent<Rigidbody2D>();
         velocity = new Vector2();
+        velocity.x += 2.0f;
+        rb2.velocity = velocity;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W)) MvUp(); 
-        if (Input.GetKeyDown(KeyCode.S)) MvDn();
-        if (Input.GetKeyDown(KeyCode.A)) MvLeft(); 
-        if (Input.GetKeyDown(KeyCode.D)) MvRight();
+        if (Input.GetKeyDown(KeyCode.W)) AddThrust(); 
+        if (Input.GetKeyDown(KeyCode.A)) RotateCW(); 
+        if (Input.GetKeyDown(KeyCode.D)) RotateACW();
     }
 
-    private void MvUp()
+    private void AddThrust()
     {
+        // In the direction currently pointed at add thrust:
         velocity = rb2.velocity;
         velocity.y += 2;
         rb2.velocity = velocity;
         //rb2.velocity.x = velocityX;
     }
     
-    private void MvDn()
+    // private void RotateCW()
+    // {
+    //     velocity = rb2.velocity;
+    //     velocity.y -= 2;
+    //     rb2.velocity = velocity;
+    // }
+    
+    private void RotateCW()
     {
-        velocity = rb2.velocity;
-        velocity.y -= 2;
-        rb2.velocity = velocity;
+        
+        //velocity.x += 10;
         //rb2.velocity.x = velocityX;
     }
     
-    private void MvLeft()
+    private void RotateACW()
     {
-        velocity.x += 10;
-        //rb2.velocity.x = velocityX;
-    }
-    
-    private void MvRight()
-    {
-        velocity.x += 10;
+        //velocity.x += 10;
         //rb2.velocity.x = velocityX;
     }
 }

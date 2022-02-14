@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class CollisionDetector : MonoBehaviour
 {
-    private List<GameObject> Colliders = new List<GameObject>();
+    // private List<GameObject> Colliders = new List<GameObject>();
     
     private void OnTriggerEnter2D(Collider2D col)
     {

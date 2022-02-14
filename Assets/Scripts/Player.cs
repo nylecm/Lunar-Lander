@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using UnityEngine;
 
 /**
@@ -21,7 +22,9 @@ public class Player : MonoBehaviour
     private Vector2 curPos;
     private float curAngle = 0.0f;
     private int fuelSupply = 10000;
-    // todo get rid of magical numbers.
+    private const float rotIncrement = 0.16f;
+    private const float thrustVelocityIncrement = 0.009f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -59,24 +62,24 @@ public class Player : MonoBehaviour
         }
         
         // todo get rid of framerate dependence.
-        float speed = 0.009f;
         bool posAngle = (curAngle > 0);
         velocity = rb2.velocity;
 
         if (posAngle)
         {
-            velocity.y += (float) Math.Cos(ConvertToRadians(curAngle)) * speed;
-            velocity.x += (float) -(Math.Sin(ConvertToRadians(curAngle)) * speed);
+            velocity.y += (float) Math.Cos(ConvertToRadians(curAngle)) * thrustVelocityIncrement;
+            velocity.x += (float) -(Math.Sin(ConvertToRadians(curAngle)) * thrustVelocityIncrement);
         }
         else
         {
-            velocity.y += (float) (Math.Cos(ConvertToRadians(-curAngle)) * speed);
-            velocity.x += (float) (Math.Sin(ConvertToRadians(-curAngle)) * speed);
+            velocity.y += (float) (Math.Cos(ConvertToRadians(-curAngle)) * thrustVelocityIncrement);
+            velocity.x += (float) (Math.Sin(ConvertToRadians(-curAngle)) * thrustVelocityIncrement);
         }
 
         //velocity.y += 0.01f;
         rb2.velocity = velocity;
         fuelSupply -= 1;
+        Debug.Log(fuelSupply);
         //rb2.velocity.x = velocityX;
     }
 
@@ -87,28 +90,29 @@ public class Player : MonoBehaviour
     
     private void RotateCW()
     {
-        if (curAngle < -maxRot)
+        if (curAngle < -90)
         {
             return;
         }
 
-        rb2.transform.Rotate(0, 0, -0.16f, Space.Self);
-        curAngle -= 0.12f;
+        rb2.transform.Rotate(0, 0, -rotIncrement, Space.Self);
+        curAngle -= rotIncrement;
         Debug.Log(curAngle);
     }
 
     private void RotateACW()
     {
-        if (curAngle > maxRot)
+        if (curAngle > 90)
         {
             return;
         }
 
-        rb2.transform.Rotate(0, 0, 0.16f, Space.Self);
-        curAngle += 0.12f;
+        rb2.transform.Rotate(0, 0, rotIncrement, Space.Self);
+        curAngle += rotIncrement;
         Debug.Log(curAngle);
     }
 
+    [UsedImplicitly]
     public void Landed()
     {
         if (rb2.velocity.y < -0.5f)

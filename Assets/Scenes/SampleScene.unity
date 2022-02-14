@@ -461,7 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3449cafba28941949b3beb8dceb64c02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRot: 0
+  maxRot: 90
 --- !u!114 &1616816644
 MonoBehaviour:
   m_ObjectHideFlags: 0

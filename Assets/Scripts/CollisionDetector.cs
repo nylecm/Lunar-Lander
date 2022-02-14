@@ -9,7 +9,8 @@ public class CollisionDetector : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D col)
     {
-        SceneManager.LoadScene("SampleScene");
+        SendMessage("Landed");
+        Debug.Log("Hit msg sent");
     }
 
     // private void OnTriggerExit2D(Collider2D other)

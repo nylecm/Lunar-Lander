@@ -1,8 +1,15 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore;
+
+/**
+ * I am implementing a Lunar Lander Game.
+ *
+ * What I have done so far:
+ *
+ * - Basic movement of rocket:
+ *   - Rotation & Thrust
+ * - Collision Detection, and landing hardness threshold.
+ */
 
 public class Player : MonoBehaviour
 {
@@ -13,6 +20,8 @@ public class Player : MonoBehaviour
     private Vector2 prevPos;
     private Vector2 curPos;
     private float curAngle = 0.0f;
+    private int fuelSupply = 10000;
+    // todo get rid of magical numbers.
 
     // Start is called before the first frame update
     void Start()
@@ -39,10 +48,17 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.D)) RotateACW();
 
         prevPos = curPos;
+        //prevVelocityY = r
     }
 
     private void AddThrust()
     {
+        if (fuelSupply == 0)
+        {
+            return;
+        }
+        
+        // todo get rid of framerate dependence.
         float speed = 0.009f;
         bool posAngle = (curAngle > 0);
         velocity = rb2.velocity;
@@ -51,65 +67,66 @@ public class Player : MonoBehaviour
         {
             velocity.y += (float) Math.Cos(ConvertToRadians(curAngle)) * speed;
             velocity.x += (float) -(Math.Sin(ConvertToRadians(curAngle)) * speed);
-
         }
         else
         {
             velocity.y += (float) (Math.Cos(ConvertToRadians(-curAngle)) * speed);
             velocity.x += (float) (Math.Sin(ConvertToRadians(-curAngle)) * speed);
-
         }
 
         //velocity.y += 0.01f;
         rb2.velocity = velocity;
+        fuelSupply -= 1;
         //rb2.velocity.x = velocityX;
     }
-    
+
     public double ConvertToRadians(double angle)
     {
         return (Math.PI / 180) * angle;
     }
-
-    // private void RotateCW()
-    // {
-    //     velocity = rb2.velocity;
-    //     velocity.y -= 2;
-    //     rb2.velocity = velocity;
-    // }
-
+    
     private void RotateCW()
     {
-        // Debug.Log(rb2.transform.rotation.z);
-        // if (rb2.transform.rotation.z > -0.5) // todo fix
-        // {
-        if (curAngle < -90)
+        if (curAngle < -maxRot)
         {
             return;
-        } 
-        
+        }
+
         rb2.transform.Rotate(0, 0, -0.16f, Space.Self);
         curAngle -= 0.12f;
         Debug.Log(curAngle);
-        //}
-        //velocity.x += 10;
-        //rb2.velocity.x = velocityX;
     }
 
     private void RotateACW()
     {
-        //if (rb2.transform.rotation.z < 0.5) // todo fix
-        //{
-        if (curAngle > 90)
+        if (curAngle > maxRot)
         {
             return;
-        } 
-        
+        }
+
         rb2.transform.Rotate(0, 0, 0.16f, Space.Self);
         curAngle += 0.12f;
         Debug.Log(curAngle);
+    }
 
-        //}
-        //velocity.x += 10;
-        //rb2.velocity.x = velocityX;
+    public void Landed()
+    {
+        if (rb2.velocity.y < -0.5f)
+        {
+            Debug.Log(rb2.velocity.y + "Bang!!!");
+            //SceneManager.LoadScene("SampleScene"); todo uncomment when done
+        }
+        else if (rb2.velocity.y < -0.25f)
+        {
+            
+            Debug.Log(rb2.velocity.y + "Hard Landing!");
+            //SceneManager.LoadScene("SampleScene"); todo uncomment when done
+
+        }
+        else
+        {
+            Debug.Log(rb2.velocity.y + "BUTTER :)");
+            //SceneManager.LoadScene("SampleScene"); todo uncomment when done
+        }
     }
 }

@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
     private const float RotIncrement = 0.16f;
     private const float ThrustVelocityIncrement = 0.012f;
 
+    public static event Action<int> OnFuelChange;
+
     private void Awake()
     {
         _rb2 = GetComponent<Rigidbody2D>();
@@ -37,6 +39,7 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
+
     private void Update()
     {
         _curPos = _rb2.position;
@@ -77,6 +80,7 @@ public class Player : MonoBehaviour
         //velocity.y += 0.01f;
         _rb2.velocity = _velocity;
         _fuelSupply -= 1;
+        OnFuelChange?.Invoke(_fuelSupply);
         Debug.Log(_fuelSupply);
         //rb2.velocity.x = velocityX;
     }

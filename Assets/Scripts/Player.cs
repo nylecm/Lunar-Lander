@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     private float _curAngle = 0.0f;
     private int _fuelSupply = 10000;
     private const float RotIncrement = 0.16f;
-    private const float ThrustVelocityIncrement = 0.012f;
+    private const float ThrustVelocityIncrement = 0.015f;
 
     public static event Action<int> OnFuelChange;
     public static event Action<float> OnVSpeedChange; 

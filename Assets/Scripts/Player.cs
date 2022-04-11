@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     private const float ThrustVelocityIncrement = 0.012f;
 
     public static event Action<int> OnFuelChange;
+    public static event Action<float> OnVSpeedChange; 
 
     private void Awake()
     {
@@ -48,6 +49,7 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) RotateACW();
 
         _prevPos = _curPos;
+        OnVSpeedChange?.Invoke(_rb2.velocity.y);
         //prevVelocityY = r
     }
 

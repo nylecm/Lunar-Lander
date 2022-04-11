@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
 
     public static event Action<int> OnFuelChange;
     public static event Action<float> OnVSpeedChange; 
+    public static event Action<float> OnHSpeedChange; 
 
     private void Awake()
     {
@@ -50,6 +51,7 @@ public class Player : MonoBehaviour
 
         _prevPos = _curPos;
         OnVSpeedChange?.Invoke(_rb2.velocity.y);
+        OnHSpeedChange?.Invoke(_rb2.velocity.x);
         //prevVelocityY = r
     }
 

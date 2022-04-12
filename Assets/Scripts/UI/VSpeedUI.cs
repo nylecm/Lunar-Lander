@@ -25,6 +25,6 @@ public class VSpeedUI : MonoBehaviour
     private void UpdateVSpeed(float vSpeed)
     {
         vSpeed = (float)Math.Round(vSpeed * 197.0f);
-        _vSpeedText.text = "V-Speed: " + vSpeed + "fpm";
+        if (_vSpeedText != null) _vSpeedText.text = "V-Speed: " + vSpeed + "fpm";
     }
 }

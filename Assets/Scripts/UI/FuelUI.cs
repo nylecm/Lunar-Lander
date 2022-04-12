@@ -4,7 +4,7 @@ using TMPro;
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class FuelUI : MonoBehaviour
 {
-    private TextMeshProUGUI fuelText;
+    private TextMeshProUGUI _fuelText;
 
     private void OnEnable()
     {
@@ -18,11 +18,11 @@ public class FuelUI : MonoBehaviour
 
     private void Awake()
     {
-        fuelText = GetComponent<TextMeshProUGUI>();
+        _fuelText = GetComponent<TextMeshProUGUI>();
     }
 
     private void UpdateFuel(int fuel)
     {
-        fuelText.text = "Fuel: " + fuel.ToString();
+        if (_fuelText != null) _fuelText.text = "Fuel: " + fuel.ToString();
     }
 }

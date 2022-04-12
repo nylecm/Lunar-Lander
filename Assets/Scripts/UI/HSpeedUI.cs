@@ -25,6 +25,6 @@ public class HSpeedUI : MonoBehaviour
     private void UpdateHSpeed(float hSpeed)
     {
         hSpeed = (float)Math.Round(hSpeed * 197.0f);
-        _hSpeedText.text = "H-Speed: " + hSpeed + "fpm";
+        if (_hSpeedText != null) _hSpeedText.text = "H-Speed: " + hSpeed + "fpm";
     }
 }

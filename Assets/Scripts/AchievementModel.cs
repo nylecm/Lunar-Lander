@@ -1,17 +1,14 @@
-namespace DefaultNamespace
+public class AchievementModel
 {
-    public class AchievementModel
+    private readonly string _id;
+
+    public AchievementModel(string id)
     {
-        private readonly string _id;
+        _id = id;
+    }
 
-        public AchievementModel(string id)
-        {
-            _id = id;
-        }
-
-        public string GetId()
-        {
-            return _id;
-        }
+    public string GetId()
+    {
+        return _id;
     }
 }

@@ -15,20 +15,23 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     [SerializeField] private int maxRot;
+    [SerializeField] private int fuelSupply;
 
     private Rigidbody2D _rb2;
     private Vector2 _velocity;
     private Vector2 _prevPos;
     private Vector2 _curPos;
     private float _curAngle = 0.0f;
-    private int _fuelSupply = 4000;
     private const float RotIncrement = 0.16f;
-    private const float ThrustVelocityIncrement = 0.015f;
+    private const float ThrustVelocityIncrement = 0.020f;
     private bool _isFuelDepleted = false;
 
     private AchievementManager _achievementManager;
-    private const int OutOfFuelAchievementID = 1;
-
+    private const int OutOfFuelAchievementID = 0;
+    private const int HardLandingAchievementID = 1;
+    private const int SoftLandingAchievementID = 2;
+    private const int ButterLandingAchievementID = 3;
+    
     public static event Action<int> OnFuelChange;
     public static event Action<float> OnVSpeedChange;
     public static event Action<float> OnHSpeedChange;
@@ -69,7 +72,7 @@ public class Player : MonoBehaviour
      */
     private void AddThrust()
     {
-        if (_fuelSupply <= 0)
+        if (fuelSupply <= 0)
         {
             if (_isFuelDepleted) return;
 
@@ -97,9 +100,9 @@ public class Player : MonoBehaviour
 
         //velocity.y += 0.01f;
         _rb2.velocity = _velocity;
-        _fuelSupply -= 1;
-        OnFuelChange?.Invoke(_fuelSupply);
-        Debug.Log(_fuelSupply);
+        fuelSupply -= 1;
+        OnFuelChange?.Invoke(fuelSupply);
+        Debug.Log(fuelSupply);
         //rb2.velocity.x = velocityX;
     }
 

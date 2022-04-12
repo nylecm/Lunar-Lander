@@ -21,13 +21,22 @@ public class Player : MonoBehaviour
     private Vector2 _prevPos;
     private Vector2 _curPos;
     private float _curAngle = 0.0f;
-    private int _fuelSupply = 10000;
+    private int _fuelSupply = 4000;
     private const float RotIncrement = 0.16f;
     private const float ThrustVelocityIncrement = 0.015f;
+    private bool _isFuelDepleted = false;
+
+    private AchievementManager _achievementManager;
+    private const int OutOfFuelAchievementID = 1;
 
     public static event Action<int> OnFuelChange;
-    public static event Action<float> OnVSpeedChange; 
-    public static event Action<float> OnHSpeedChange; 
+    public static event Action<float> OnVSpeedChange;
+    public static event Action<float> OnHSpeedChange;
+
+    private void Start()
+    {
+        _achievementManager = FindObjectOfType<AchievementManager>();
+    }
 
     private void Awake()
     {
@@ -60,8 +69,13 @@ public class Player : MonoBehaviour
      */
     private void AddThrust()
     {
-        if (_fuelSupply == 0)
+        if (_fuelSupply <= 0)
         {
+            if (_isFuelDepleted) return;
+
+            _isFuelDepleted = true;
+            Debug.Log("Notify Achievement Out of Fuel ID:" + OutOfFuelAchievementID);
+            _achievementManager.NotifyAchievementComplete(OutOfFuelAchievementID.ToString());
             Debug.Log("No fuel: Unable to Add Thrust!");
             return;
         }

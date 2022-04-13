@@ -23,7 +23,8 @@ public class Player : MonoBehaviour
     private Vector2 _curPos;
     private float _curAngle = 0.0f;
     private const float RotIncrement = 0.16f;
-    private const float ThrustVelocityIncrement = 0.020f;
+    //private float _thrustVelocityIncrement = 0.020f;
+    private const float _thrustVelocityIncrement = 8.000f;
     private bool _isFuelDepleted = false;
 
     private AchievementManager _achievementManager;
@@ -81,15 +82,19 @@ public class Player : MonoBehaviour
         bool posAngle = (_curAngle > 0);
         _velocity = _rb2.velocity;
 
+        Debug.Log("TVRDT = " + Time.deltaTime);
+
+        float adjustedThrustVelocityIncrement = _thrustVelocityIncrement * Time.deltaTime;
+        Debug.Log("TVR = " + adjustedThrustVelocityIncrement);
         if (posAngle)
         {
-            _velocity.y += (float) Math.Cos(ConvertToRadians(_curAngle)) * ThrustVelocityIncrement;
-            _velocity.x += (float) -(Math.Sin(ConvertToRadians(_curAngle)) * ThrustVelocityIncrement);
+            _velocity.y += (float) Math.Cos(ConvertToRadians(_curAngle)) * adjustedThrustVelocityIncrement;
+            _velocity.x += (float) -(Math.Sin(ConvertToRadians(_curAngle)) * adjustedThrustVelocityIncrement);
         }
         else
         {
-            _velocity.y += (float) (Math.Cos(ConvertToRadians(-_curAngle)) * ThrustVelocityIncrement);
-            _velocity.x += (float) (Math.Sin(ConvertToRadians(-_curAngle)) * ThrustVelocityIncrement);
+            _velocity.y += (float) (Math.Cos(ConvertToRadians(-_curAngle)) * adjustedThrustVelocityIncrement);
+            _velocity.x += (float) (Math.Sin(ConvertToRadians(-_curAngle)) * adjustedThrustVelocityIncrement);
         }
 
         //velocity.y += 0.01f;

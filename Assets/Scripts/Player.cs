@@ -74,12 +74,6 @@ public class Player : MonoBehaviour
     {
         if (fuelSupply <= 0)
         {
-            if (_isFuelDepleted) return;
-
-            _isFuelDepleted = true;
-            Debug.Log("Notify Achievement Out of Fuel ID:" + OutOfFuelAchievementID);
-            _achievementManager.NotifyAchievementComplete(OutOfFuelAchievementID.ToString());
-            Debug.Log("No fuel: Unable to Add Thrust!");
             return;
         }
 
@@ -102,7 +96,11 @@ public class Player : MonoBehaviour
         _rb2.velocity = _velocity;
         fuelSupply -= 1;
         OnFuelChange?.Invoke(fuelSupply);
-        Debug.Log(fuelSupply);
+
+        if (fuelSupply % 100 == 0)
+        {
+            Debug.Log("Fuel Supply: " + fuelSupply);
+        }
         //rb2.velocity.x = velocityX;
     }
 
@@ -120,7 +118,7 @@ public class Player : MonoBehaviour
 
         _rb2.transform.Rotate(0, 0, -RotIncrement, Space.Self);
         _curAngle -= RotIncrement;
-        Debug.Log(_curAngle);
+        //Debug.Log(_curAngle);
     }
 
     private void RotateACW()
@@ -132,7 +130,7 @@ public class Player : MonoBehaviour
 
         _rb2.transform.Rotate(0, 0, RotIncrement, Space.Self);
         _curAngle += RotIncrement;
-        Debug.Log(_curAngle);
+        //Debug.Log(_curAngle);
     }
 
     [UsedImplicitly]

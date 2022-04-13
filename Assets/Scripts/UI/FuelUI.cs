@@ -23,6 +23,7 @@ public class FuelUI : MonoBehaviour
 
     private void UpdateFuel(float fuel)
     {
-        if (_fuelText != null) _fuelText.text = "Fuel: " + fuel.ToString();
+        if (fuel < 0.0f) fuel = 0; // todo round it
+        if (_fuelText != null) _fuelText.text = "Fuel: " + fuel;
     }
 }

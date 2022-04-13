@@ -23,8 +23,8 @@ public class Player : MonoBehaviour
     private Vector2 _curPos;
     private float _curAngle = 0.0f;
     private const float RotIncrement = 64f;
-    private const float ThrustVelocityIncrement = 8f; // Thrust Added Per Second
-    private const int FuelConsumptionIncrement = 400;
+    private const float ThrustVelocityIncrement = 6f; // Thrust Added Per Second
+    private const int FuelConsumptionIncrement = 15;
     private bool _isFuelDepleted = false;
 
     private AchievementManager _achievementManager;
@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
 
     private void RotateCW(float adjustedRotationIncrement)
     {
-        if (_curAngle < -90)
+        if (_curAngle < -maxRot)
         {
             return;
         }
@@ -129,7 +129,7 @@ public class Player : MonoBehaviour
 
     private void RotateACW(float adjustedRotationIncrement)
     {
-        if (_curAngle > 90)
+        if (_curAngle > maxRot)
         {
             return;
         }
@@ -142,19 +142,23 @@ public class Player : MonoBehaviour
     [UsedImplicitly]
     public void Landed()
     {
-        if (_rb2.velocity.y < -1.4f)
+        // Classifying the hardness of the landing, note negative velocity.
+        if (_rb2.velocity.y < -1.5f) // FAILURE: vertical speed greater than approx. 300 ft/m
         {
             Debug.Log(_rb2.velocity.y + "Bang!!!");
+            //_achievementManager.NotifyAchievementComplete("1"); todo fix this is not working as the scene gets reloaded
             SceneManager.LoadScene("SampleScene");
         }
-        else if (_rb2.velocity.y < -0.7f)
+        else if (_rb2.velocity.y < -0.7f) // HARD LANDING: vertical speed approx. between 150 & 300 ft/m
         {
             Debug.Log(_rb2.velocity.y + "Hard Landing!");
+            //_achievementManager.NotifyAchievementComplete("2");
             SceneManager.LoadScene("SampleScene");
         }
-        else
+        else // SOFT LANDING: vertical speed approx. less then 150 ft/m
         {
             Debug.Log(_rb2.velocity.y + "BUTTER :)");
+            //_achievementManager.NotifyAchievementComplete("3");
             SceneManager.LoadScene("SampleScene");
         }
     }

@@ -15,16 +15,16 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     [SerializeField] private int maxRot;
-    [SerializeField] private int fuelSupply;
+    [SerializeField] private float fuelSupply;
 
     private Rigidbody2D _rb2;
     private Vector2 _velocity;
     private Vector2 _prevPos;
     private Vector2 _curPos;
     private float _curAngle = 0.0f;
-    private const float RotIncrement = 0.16f;
-    //private float _thrustVelocityIncrement = 0.020f;
-    private const float _thrustVelocityIncrement = 8.000f;
+    private const float RotIncrement = 64f;
+    private const float ThrustVelocityIncrement = 8f; // Thrust Added Per Second
+    private const int FuelConsumptionIncrement = 400;
     private bool _isFuelDepleted = false;
 
     private AchievementManager _achievementManager;
@@ -32,8 +32,8 @@ public class Player : MonoBehaviour
     private const int HardLandingAchievementID = 1;
     private const int SoftLandingAchievementID = 2;
     private const int ButterLandingAchievementID = 3;
-    
-    public static event Action<int> OnFuelChange;
+
+    public static event Action<float> OnFuelChange;
     public static event Action<float> OnVSpeedChange;
     public static event Action<float> OnHSpeedChange;
 
@@ -57,10 +57,17 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        float deltaTime = Time.deltaTime;
+        float adjustedRotationIncrement = RotIncrement * deltaTime;
+        float adjustedThrustVelocityIncrement = ThrustVelocityIncrement * Time.deltaTime;
+        float adjustedFuelConsumptionIncrement = FuelConsumptionIncrement * deltaTime;
         _curPos = _rb2.position;
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) AddThrust();
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) RotateACW();
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) RotateCW();
+
+
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+            AddThrust(adjustedThrustVelocityIncrement, adjustedFuelConsumptionIncrement);
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) RotateACW(adjustedRotationIncrement);
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) RotateCW(adjustedRotationIncrement);
 
         _prevPos = _curPos;
         OnVSpeedChange?.Invoke(_rb2.velocity.y);
@@ -71,21 +78,15 @@ public class Player : MonoBehaviour
     /**
      * Adds thrust in the direction the rocket is pointing.
      */
-    private void AddThrust()
+    private void AddThrust(float adjustedThrustVelocityIncrement, float adjustedFuelConsumptionIncrement)
     {
-        if (fuelSupply <= 0)
-        {
-            return;
-        }
+        if (fuelSupply <= 0) return;
 
-        // todo get rid of framerate dependence.
         bool posAngle = (_curAngle > 0);
         _velocity = _rb2.velocity;
 
-        Debug.Log("TVRDT = " + Time.deltaTime);
-
-        float adjustedThrustVelocityIncrement = _thrustVelocityIncrement * Time.deltaTime;
-        Debug.Log("TVR = " + adjustedThrustVelocityIncrement);
+        // Debug.Log("TVRDT = " + Time.deltaTime);
+        // Debug.Log("TVR = " + adjustedThrustVelocityIncrement);
         if (posAngle)
         {
             _velocity.y += (float) Math.Cos(ConvertToRadians(_curAngle)) * adjustedThrustVelocityIncrement;
@@ -99,7 +100,7 @@ public class Player : MonoBehaviour
 
         //velocity.y += 0.01f;
         _rb2.velocity = _velocity;
-        fuelSupply -= 1;
+        fuelSupply -= adjustedFuelConsumptionIncrement;
         OnFuelChange?.Invoke(fuelSupply);
 
         if (fuelSupply % 100 == 0)
@@ -114,27 +115,27 @@ public class Player : MonoBehaviour
         return (Math.PI / 180) * angle;
     }
 
-    private void RotateCW()
+    private void RotateCW(float adjustedRotationIncrement)
     {
         if (_curAngle < -90)
         {
             return;
         }
 
-        _rb2.transform.Rotate(0, 0, -RotIncrement, Space.Self);
-        _curAngle -= RotIncrement;
+        _rb2.transform.Rotate(0, 0, -adjustedRotationIncrement, Space.Self);
+        _curAngle -= adjustedRotationIncrement;
         //Debug.Log(_curAngle);
     }
 
-    private void RotateACW()
+    private void RotateACW(float adjustedRotationIncrement)
     {
         if (_curAngle > 90)
         {
             return;
         }
 
-        _rb2.transform.Rotate(0, 0, RotIncrement, Space.Self);
-        _curAngle += RotIncrement;
+        _rb2.transform.Rotate(0, 0, adjustedRotationIncrement, Space.Self);
+        _curAngle += adjustedRotationIncrement;
         //Debug.Log(_curAngle);
     }
 

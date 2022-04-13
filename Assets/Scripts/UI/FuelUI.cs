@@ -21,7 +21,7 @@ public class FuelUI : MonoBehaviour
         _fuelText = GetComponent<TextMeshProUGUI>();
     }
 
-    private void UpdateFuel(int fuel)
+    private void UpdateFuel(float fuel)
     {
         if (_fuelText != null) _fuelText.text = "Fuel: " + fuel.ToString();
     }

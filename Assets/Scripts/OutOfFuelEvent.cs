@@ -20,7 +20,7 @@ public class OutOfFuelEvent : MonoBehaviour
         _achievementManager = FindObjectOfType<AchievementManager>();
     }
 
-    private void CheckRocketFuel(int fuel)
+    private void CheckRocketFuel(float fuel)
     {
         if (fuel == 0) PerformOutOfFuelActions();
     }

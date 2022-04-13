@@ -58,8 +58,8 @@ public class Player : MonoBehaviour
     {
         _curPos = _rb2.position;
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) AddThrust();
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) RotateCW();
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) RotateACW();
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) RotateACW();
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) RotateCW();
 
         _prevPos = _curPos;
         OnVSpeedChange?.Invoke(_rb2.velocity.y);

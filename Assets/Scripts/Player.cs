@@ -19,19 +19,18 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D _rb2;
     private Vector2 _velocity;
-    private Vector2 _prevPos;
-    private Vector2 _curPos;
-    private float _curAngle = 0.0f;
+    //private Vector2 _prevPos;
+    //private Vector2 _curPos;
+    private float _curAngle;
     private const float RotIncrement = 64f;
     private const float ThrustVelocityIncrement = 6f; // Thrust Added Per Second
     private const int FuelConsumptionIncrement = 15;
-    private bool _isFuelDepleted = false;
 
     private AchievementManager _achievementManager;
-    private const int OutOfFuelAchievementID = 0;
-    private const int HardLandingAchievementID = 1;
-    private const int SoftLandingAchievementID = 2;
-    private const int ButterLandingAchievementID = 3;
+    // private const int OutOfFuelAchievementID = 0;
+    // private const int HardLandingAchievementID = 1;
+    // private const int SoftLandingAchievementID = 2;
+    // private const int ButterLandingAchievementID = 3;
 
     public static event Action<float> OnFuelChange;
     public static event Action<float> OnVSpeedChange;
@@ -46,8 +45,8 @@ public class Player : MonoBehaviour
     {
         _rb2 = GetComponent<Rigidbody2D>();
         _rb2.gravityScale = 0.3f;
-        _curPos = _rb2.position;
-        _prevPos = _curPos;
+        //_curPos = _rb2.position;
+        //_prevPos = _curPos;
         _velocity = new Vector2();
         _velocity.x = 1.2f;
         _rb2.velocity = _velocity;
@@ -61,7 +60,7 @@ public class Player : MonoBehaviour
         float adjustedRotationIncrement = RotIncrement * deltaTime;
         float adjustedThrustVelocityIncrement = ThrustVelocityIncrement * Time.deltaTime;
         float adjustedFuelConsumptionIncrement = FuelConsumptionIncrement * deltaTime;
-        _curPos = _rb2.position;
+        //_curPos = _rb2.position;
 
 
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
@@ -69,7 +68,7 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) RotateACW(adjustedRotationIncrement);
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) RotateCW(adjustedRotationIncrement);
 
-        _prevPos = _curPos;
+        //_prevPos = _curPos;
         OnVSpeedChange?.Invoke(_rb2.velocity.y);
         OnHSpeedChange?.Invoke(_rb2.velocity.x);
         //prevVelocityY = r
@@ -110,33 +109,27 @@ public class Player : MonoBehaviour
         //rb2.velocity.x = velocityX;
     }
 
-    public double ConvertToRadians(double angle)
+    private double ConvertToRadians(double angle)
     {
         return (Math.PI / 180) * angle;
     }
 
     private void RotateCW(float adjustedRotationIncrement)
     {
-        if (_curAngle < -maxRot)
-        {
-            return;
-        }
+        if (_curAngle < -maxRot) return;
 
         _rb2.transform.Rotate(0, 0, -adjustedRotationIncrement, Space.Self);
         _curAngle -= adjustedRotationIncrement;
-        //Debug.Log(_curAngle);
+        // Debug.Log(_curAngle);
     }
 
     private void RotateACW(float adjustedRotationIncrement)
     {
-        if (_curAngle > maxRot)
-        {
-            return;
-        }
-
+        if (_curAngle > maxRot) return;
+        
         _rb2.transform.Rotate(0, 0, adjustedRotationIncrement, Space.Self);
         _curAngle += adjustedRotationIncrement;
-        //Debug.Log(_curAngle);
+        // Debug.Log(_curAngle);
     }
 
     [UsedImplicitly]

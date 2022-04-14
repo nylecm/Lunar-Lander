@@ -19,13 +19,16 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D _rb2;
     private Transform _transform;
+
     private Vector2 _velocity;
+
     //private Vector2 _prevPos;
     //private Vector2 _curPos;
     private float _curAngle;
     private const float RotIncrement = 64f;
     private const float ThrustVelocityIncrement = 6f; // Thrust Added Per Second
     private const int FuelConsumptionIncrement = 15;
+    private int _points;
 
     private AchievementManager _achievementManager;
     // private const int OutOfFuelAchievementID = 0;
@@ -51,7 +54,8 @@ public class Player : MonoBehaviour
 
     private void EnterStartingPosition()
     {
-        _transform.position = new Vector3(-15, 8, 0);
+        Debug.Log("You have: " + _points + " points.");
+        _transform.position = new Vector3(-15, 8.5f, 0);
         _velocity = new Vector2();
         _velocity.x = 1.2f;
         _rb2.velocity = _velocity;
@@ -131,7 +135,7 @@ public class Player : MonoBehaviour
     private void RotateACW(float adjustedRotationIncrement)
     {
         if (_curAngle > maxRot) return;
-        
+
         _rb2.transform.Rotate(0, 0, adjustedRotationIncrement, Space.Self);
         _curAngle += adjustedRotationIncrement;
         // Debug.Log(_curAngle);
@@ -145,25 +149,38 @@ public class Player : MonoBehaviour
         {
             Debug.Log(_rb2.velocity.y + "Bang!!!");
             HandleGameFailure();
-            //_achievementManager.NotifyAchievementComplete("1"); todo fix this is not working as the scene gets reloaded
         }
         else if (_rb2.velocity.y < -0.7f) // HARD LANDING: vertical speed approx. between 150 & 300 ft/m
         {
             Debug.Log(_rb2.velocity.y + "Hard Landing!");
-            if (fuelSupply > 0) EnterStartingPosition(); else HandleGameFailure(); 
-            //_achievementManager.NotifyAchievementComplete("2");
+            if (fuelSupply > 0)
+            {
+                _points += 25;
+                EnterStartingPosition();
+            }
+            else
+            {
+                HandleGameFailure();
+            }
         }
         else // SOFT LANDING: vertical speed approx. less then 150 ft/m
         {
             Debug.Log(_rb2.velocity.y + "BUTTER :)");
-            if (fuelSupply > 0) EnterStartingPosition(); else HandleGameFailure();
-            //_achievementManager.NotifyAchievementComplete("3");
+            if (fuelSupply > 0)
+            {
+                _points += 100;
+                EnterStartingPosition();
+            }
+            else
+            {
+                HandleGameFailure();
+            }
         }
     }
 
     private void HandleGameFailure()
     {
-        Debug.Log("You have failed the game");
+        Debug.Log("You have failed the game with: " + _points + " points.");
         SceneManager.LoadScene("SampleScene");
     }
 }

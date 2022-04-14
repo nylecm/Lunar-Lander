@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float fuelSupply;
 
     private Rigidbody2D _rb2;
+    private Transform _transform;
     private Vector2 _velocity;
     //private Vector2 _prevPos;
     //private Vector2 _curPos;
@@ -44,9 +45,13 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         _rb2 = GetComponent<Rigidbody2D>();
-        _rb2.gravityScale = 0.3f;
-        //_curPos = _rb2.position;
-        //_prevPos = _curPos;
+        _transform = GetComponent<Transform>();
+        EnterStartingPosition();
+    }
+
+    private void EnterStartingPosition()
+    {
+        _transform.position = new Vector3(-15, 8, 0);
         _velocity = new Vector2();
         _velocity.x = 1.2f;
         _rb2.velocity = _velocity;
@@ -140,19 +145,22 @@ public class Player : MonoBehaviour
         {
             Debug.Log(_rb2.velocity.y + "Bang!!!");
             //_achievementManager.NotifyAchievementComplete("1"); todo fix this is not working as the scene gets reloaded
-            SceneManager.LoadScene("SampleScene");
+            EnterStartingPosition();
+            //SceneManager.LoadScene("SampleScene");
         }
         else if (_rb2.velocity.y < -0.7f) // HARD LANDING: vertical speed approx. between 150 & 300 ft/m
         {
             Debug.Log(_rb2.velocity.y + "Hard Landing!");
             //_achievementManager.NotifyAchievementComplete("2");
-            SceneManager.LoadScene("SampleScene");
+            EnterStartingPosition();
+            //SceneManager.LoadScene("SampleScene");
         }
         else // SOFT LANDING: vertical speed approx. less then 150 ft/m
         {
             Debug.Log(_rb2.velocity.y + "BUTTER :)");
             //_achievementManager.NotifyAchievementComplete("3");
-            SceneManager.LoadScene("SampleScene");
+            EnterStartingPosition();
+            //SceneManager.LoadScene("SampleScene");
         }
     }
 }

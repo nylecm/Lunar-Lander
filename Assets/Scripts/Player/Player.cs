@@ -158,8 +158,9 @@ public class Player : MonoBehaviour
                 _points += 25;
                 EnterStartingPosition();
             }
-            else
+            else // Close to impossible (gotta cover all cases).
             {
+                _points += 25;
                 HandleGameFailure();
             }
         }
@@ -171,8 +172,9 @@ public class Player : MonoBehaviour
                 _points += 100;
                 EnterStartingPosition();
             }
-            else
+            else // Close to impossible (gotta cover all cases).
             {
+                _points += 100;
                 HandleGameFailure();
             }
         }

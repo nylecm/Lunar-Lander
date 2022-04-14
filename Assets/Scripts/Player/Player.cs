@@ -138,29 +138,32 @@ public class Player : MonoBehaviour
     }
 
     [UsedImplicitly]
-    public void Landed()
+    public void Landed() // todo check if this needs to be public
     {
         // Classifying the hardness of the landing, note negative velocity.
         if (_rb2.velocity.y < -1.5f) // FAILURE: vertical speed greater than approx. 300 ft/m
         {
             Debug.Log(_rb2.velocity.y + "Bang!!!");
+            HandleGameFailure();
             //_achievementManager.NotifyAchievementComplete("1"); todo fix this is not working as the scene gets reloaded
-            EnterStartingPosition();
-            //SceneManager.LoadScene("SampleScene");
         }
         else if (_rb2.velocity.y < -0.7f) // HARD LANDING: vertical speed approx. between 150 & 300 ft/m
         {
             Debug.Log(_rb2.velocity.y + "Hard Landing!");
+            if (fuelSupply > 0) EnterStartingPosition(); else HandleGameFailure(); 
             //_achievementManager.NotifyAchievementComplete("2");
-            EnterStartingPosition();
-            //SceneManager.LoadScene("SampleScene");
         }
         else // SOFT LANDING: vertical speed approx. less then 150 ft/m
         {
             Debug.Log(_rb2.velocity.y + "BUTTER :)");
+            if (fuelSupply > 0) EnterStartingPosition(); else HandleGameFailure();
             //_achievementManager.NotifyAchievementComplete("3");
-            EnterStartingPosition();
-            //SceneManager.LoadScene("SampleScene");
         }
+    }
+
+    private void HandleGameFailure()
+    {
+        Debug.Log("You have failed the game");
+        SceneManager.LoadScene("SampleScene");
     }
 }

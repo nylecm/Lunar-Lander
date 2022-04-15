@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rb2;
     private Transform _transform;
 
+    private ParticleSystem _particleSystem;
+
     private Vector2 _velocity;
     private float _curAngle;
     private const float RotIncrement = 64f;
@@ -49,6 +51,8 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        _particleSystem = GetComponentInChildren<ParticleSystem>();
+        _particleSystem.Stop();
         _rb2 = GetComponent<Rigidbody2D>();
         _transform = GetComponent<Transform>();
         EnterStartingPosition();
@@ -78,6 +82,9 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             AddThrust(adjustedThrustVelocityIncrement, adjustedFuelConsumptionIncrement);
+        else
+            _particleSystem.Stop();
+        
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) RotateACW(adjustedRotationIncrement);
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) RotateCW(adjustedRotationIncrement);
 
@@ -91,6 +98,11 @@ public class Player : MonoBehaviour
      */
     private void AddThrust(float adjustedThrustVelocityIncrement, float adjustedFuelConsumptionIncrement)
     {
+        if (_particleSystem.isStopped)
+        {
+            _particleSystem.Play();
+        }
+
         if (fuelSupply <= 0) return;
 
         bool posAngle = (_curAngle > 0);

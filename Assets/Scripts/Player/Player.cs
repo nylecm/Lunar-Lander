@@ -153,7 +153,8 @@ public class Player : MonoBehaviour
             Debug.Log(_rb2.velocity.y + "Bang!!!");
             HandleGameFailure();
         }
-        else if (_rb2.velocity.y < SoftLandingVSpeedThresh) // HARD LANDING: vertical speed approx. between 150 & 300 ft/m
+        else if
+            (_rb2.velocity.y < SoftLandingVSpeedThresh) // HARD LANDING: vertical speed approx. between 150 & 300 ft/m
         {
             Debug.Log(_rb2.velocity.y + "Hard Landing!");
             if (fuelSupply > 0)

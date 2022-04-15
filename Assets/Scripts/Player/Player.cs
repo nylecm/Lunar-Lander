@@ -147,9 +147,14 @@ public class Player : MonoBehaviour
 
     [UsedImplicitly]
     public void Landed() // todo check if this needs to be public
-    {
-        // Classifying the hardness of the landing, note negative velocity.
-        if (_rb2.velocity.y < -1.5f) // FAILURE: vertical speed greater than approx. 300 ft/m
+    {        
+        // Classifying the hardness and angle of the landing, note negative velocity.
+        if (_curAngle > 10 || _curAngle < -10) // todo extract const
+        {
+            Debug.Log("Landing Angle to Extreme: " + _curAngle);
+            HandleGameFailure();
+        }
+        else if (_rb2.velocity.y < -1.5f) // FAILURE: vertical speed greater than approx. 300 ft/m
         {
             Debug.Log(_rb2.velocity.y + "Bang!!!");
             HandleGameFailure();

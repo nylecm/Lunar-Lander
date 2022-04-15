@@ -23,7 +23,7 @@ public class CentralTextUI : MonoBehaviour
         _centralText = GetComponent<TextMeshProUGUI>();
     }
 
-    private async void UpdateText(LandedCentreMessage msg)
+    private async void UpdateText(CentreMessage msg)
     {
         _centralText.text = msg.ToString();
         await Task.Delay(2000);

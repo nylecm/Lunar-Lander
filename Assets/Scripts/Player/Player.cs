@@ -1,8 +1,6 @@
 using System;
-using System.Threading;
 using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /**
  * I am implementing a Lunar Lander Game.
@@ -36,11 +34,13 @@ public class Player : MonoBehaviour
 
     private const int HardLandingPoints = 25;
     private const int SoftLandingPoints = 100;
+    private const float HardLandingVSpeedThresh = -1.5f;
+    private const float SoftLandingVSpeedThresh = -0.7f;
 
     public static event Action<float> OnFuelChange;
     public static event Action<float> OnVSpeedChange;
     public static event Action<float> OnHSpeedChange;
-    public static event Action<LandedCentreMessage> OnLanded;
+    public static event Action<CentreMessage> OnLanded;
 
     private void Start()
     {
@@ -148,24 +148,24 @@ public class Player : MonoBehaviour
             Debug.Log("Landing Angle to Extreme: " + _curAngle);
             HandleGameFailure();
         }
-        else if (_rb2.velocity.y < -1.5f) // FAILURE: vertical speed greater than approx. 300 ft/m
+        else if (_rb2.velocity.y < HardLandingVSpeedThresh) // FAILURE: vertical speed greater than approx. 300 ft/m
         {
             Debug.Log(_rb2.velocity.y + "Bang!!!");
             HandleGameFailure();
         }
-        else if (_rb2.velocity.y < -0.7f) // HARD LANDING: vertical speed approx. between 150 & 300 ft/m
+        else if (_rb2.velocity.y < SoftLandingVSpeedThresh) // HARD LANDING: vertical speed approx. between 150 & 300 ft/m
         {
             Debug.Log(_rb2.velocity.y + "Hard Landing!");
             if (fuelSupply > 0)
             {
                 _points += HardLandingPoints;
-                OnLanded?.Invoke(new LandedCentreMessage("Hard Landing", HardLandingPoints));
+                OnLanded?.Invoke(new CentreMessage("Hard Landing", HardLandingPoints));
                 EnterStartingPosition();
             }
             else // Close to impossible (gotta cover all cases).
             {
                 _points += HardLandingPoints;
-                OnLanded?.Invoke(new LandedCentreMessage("Hard Landing :) AND YOU RAN OUT!", HardLandingPoints));
+                OnLanded?.Invoke(new CentreMessage("Hard Landing :) AND YOU RAN OUT!", HardLandingPoints));
                 HandleGameFailure();
             }
         }
@@ -175,13 +175,13 @@ public class Player : MonoBehaviour
             if (fuelSupply > 0)
             {
                 _points += SoftLandingPoints;
-                OnLanded?.Invoke(new LandedCentreMessage("BUTTER :)", SoftLandingPoints));
+                OnLanded?.Invoke(new CentreMessage("BUTTER :)", SoftLandingPoints));
                 EnterStartingPosition();
             }
             else // Close to impossible (gotta cover all cases).
             {
                 _points += SoftLandingPoints;
-                OnLanded?.Invoke(new LandedCentreMessage("BUTTER :) AND YOU RAN OUT! CRAZY!", SoftLandingPoints));
+                OnLanded?.Invoke(new CentreMessage("BUTTER :) AND YOU RAN OUT! CRAZY!", SoftLandingPoints));
                 HandleGameFailure();
             }
         }
@@ -189,11 +189,7 @@ public class Player : MonoBehaviour
 
     private void HandleGameFailure()
     {
-        OnLanded?.Invoke(new LandedCentreMessage("Game Over!", _points, "SampleScene"));
+        OnLanded?.Invoke(new CentreMessage("Game Over!", _points, "SampleScene"));
         Debug.Log("You have failed the game with: " + _points + " points.");
-        /*while (true)
-        {
-            if (Input.GetKey(KeyCode.Return)) SceneManager.LoadScene("SampleScene");
-        }*/
     }
 }

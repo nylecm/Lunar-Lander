@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxRot: 90
-  fuelSupply: 3000
+  fuelSupply: 300
 --- !u!114 &564076329133598323
 MonoBehaviour:
   m_ObjectHideFlags: 0

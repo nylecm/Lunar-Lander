@@ -9,7 +9,6 @@ public class CentralTextUI : MonoBehaviour
     private void OnEnable()
     {
         Player.OnLanded += UpdateText;
-        //Player.OnFuelChange += UpdateFuel;
     }
 
     private void OnDisable()

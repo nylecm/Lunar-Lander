@@ -50,15 +50,14 @@ public class Player : MonoBehaviour
     {
         _rb2 = GetComponent<Rigidbody2D>();
         _transform = GetComponent<Transform>();
-        EnterStartingPosition(true);
+        EnterStartingPosition();
+        OnFuelChange?.Invoke(300); // TODO GET STARTING FUEL HERE PROGRAMMATICALLY.
+        OnHSpeedChange?.Invoke(_velocity.x);
+        OnVSpeedChange?.Invoke(_velocity.y);
     }
 
-    private void EnterStartingPosition(bool isFirstAttempt)
+    private void EnterStartingPosition()
     {
-        if (!isFirstAttempt)
-        {
-            OnLanded?.Invoke(new LandedCentreMessage("Testing Testing", 0));
-        }
         Debug.Log("You have: " + _points + " points.");
         _transform.position = new Vector3(-15, 8.5f, 0);
         _velocity = new Vector2();
@@ -160,8 +159,9 @@ public class Player : MonoBehaviour
             Debug.Log(_rb2.velocity.y + "Hard Landing!");
             if (fuelSupply > 0)
             {
-                _points += 25;
-                EnterStartingPosition(false);
+                _points += 100;
+                OnLanded?.Invoke(new LandedCentreMessage("Hard Landing", 25));
+                EnterStartingPosition();
             }
             else // Close to impossible (gotta cover all cases).
             {
@@ -175,7 +175,8 @@ public class Player : MonoBehaviour
             if (fuelSupply > 0)
             {
                 _points += 100;
-                EnterStartingPosition(false);
+                OnLanded?.Invoke(new LandedCentreMessage("BUTTER :)", 100));
+                EnterStartingPosition();
             }
             else // Close to impossible (gotta cover all cases).
             {

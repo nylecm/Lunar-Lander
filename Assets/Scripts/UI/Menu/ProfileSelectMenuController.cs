@@ -7,6 +7,7 @@ public class ProfileSelectMenuController : MonoBehaviour
 {
     public void PlayGame(int profile)
     {
+        Debug.Log("Opening SampleScene, with profile: " + profile);
         SceneManager.LoadScene("SampleScene");
     }
 

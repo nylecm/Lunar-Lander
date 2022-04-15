@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,9 +22,6 @@ public class Player : MonoBehaviour
     private Transform _transform;
 
     private Vector2 _velocity;
-
-    //private Vector2 _prevPos;
-    //private Vector2 _curPos;
     private float _curAngle;
     private const float RotIncrement = 64f;
     private const float ThrustVelocityIncrement = 6f; // Thrust Added Per Second
@@ -35,6 +33,9 @@ public class Player : MonoBehaviour
     // private const int HardLandingAchievementID = 1;
     // private const int SoftLandingAchievementID = 2;
     // private const int ButterLandingAchievementID = 3;
+
+    private const int HardLandingPoints = 25;
+    private const int SoftLandingPoints = 100;
 
     public static event Action<float> OnFuelChange;
     public static event Action<float> OnVSpeedChange;
@@ -75,16 +76,14 @@ public class Player : MonoBehaviour
         float adjustedFuelConsumptionIncrement = FuelConsumptionIncrement * deltaTime;
         //_curPos = _rb2.position;
 
-
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             AddThrust(adjustedThrustVelocityIncrement, adjustedFuelConsumptionIncrement);
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) RotateACW(adjustedRotationIncrement);
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) RotateCW(adjustedRotationIncrement);
 
-        //_prevPos = _curPos;
         OnVSpeedChange?.Invoke(_rb2.velocity.y);
         OnHSpeedChange?.Invoke(_rb2.velocity.x);
-        //prevVelocityY = r
+        //OnAltitudeChange
     }
 
     /**
@@ -110,16 +109,11 @@ public class Player : MonoBehaviour
             _velocity.x += (float) (Math.Sin(ConvertToRadians(-_curAngle)) * adjustedThrustVelocityIncrement);
         }
 
-        //velocity.y += 0.01f;
         _rb2.velocity = _velocity;
         fuelSupply -= adjustedFuelConsumptionIncrement;
         OnFuelChange?.Invoke(fuelSupply);
 
-        if (fuelSupply % 100 == 0)
-        {
-            Debug.Log("Fuel Supply: " + fuelSupply);
-        }
-        //rb2.velocity.x = velocityX;
+        if (fuelSupply % 100 == 0) Debug.Log("Fuel Supply: " + fuelSupply);
     }
 
     private double ConvertToRadians(double angle)
@@ -147,7 +141,7 @@ public class Player : MonoBehaviour
 
     [UsedImplicitly]
     public void Landed() // todo check if this needs to be public
-    {        
+    {
         // Classifying the hardness and angle of the landing, note negative velocity.
         if (_curAngle > 10 || _curAngle < -10) // todo extract const
         {
@@ -164,14 +158,14 @@ public class Player : MonoBehaviour
             Debug.Log(_rb2.velocity.y + "Hard Landing!");
             if (fuelSupply > 0)
             {
-                _points += 100;
-                OnLanded?.Invoke(new LandedCentreMessage("Hard Landing", 25));
+                _points += HardLandingPoints;
+                OnLanded?.Invoke(new LandedCentreMessage("Hard Landing", HardLandingPoints));
                 EnterStartingPosition();
             }
             else // Close to impossible (gotta cover all cases).
             {
-                _points += 25;
-                OnLanded?.Invoke(new LandedCentreMessage("Hard Landing :) AND YOU RAN OUT!", 25));
+                _points += HardLandingPoints;
+                OnLanded?.Invoke(new LandedCentreMessage("Hard Landing :) AND YOU RAN OUT!", HardLandingPoints));
                 HandleGameFailure();
             }
         }
@@ -180,14 +174,14 @@ public class Player : MonoBehaviour
             Debug.Log(_rb2.velocity.y + "BUTTER :)");
             if (fuelSupply > 0)
             {
-                _points += 100;
-                OnLanded?.Invoke(new LandedCentreMessage("BUTTER :)", 100));
+                _points += SoftLandingPoints;
+                OnLanded?.Invoke(new LandedCentreMessage("BUTTER :)", SoftLandingPoints));
                 EnterStartingPosition();
             }
             else // Close to impossible (gotta cover all cases).
             {
-                _points += 100;
-                OnLanded?.Invoke(new LandedCentreMessage("BUTTER :) AND YOU RAN OUT! CRAZY!", 100));
+                _points += SoftLandingPoints;
+                OnLanded?.Invoke(new LandedCentreMessage("BUTTER :) AND YOU RAN OUT! CRAZY!", SoftLandingPoints));
                 HandleGameFailure();
             }
         }
@@ -195,7 +189,11 @@ public class Player : MonoBehaviour
 
     private void HandleGameFailure()
     {
+        OnLanded?.Invoke(new LandedCentreMessage("Game Over!", _points));
         Debug.Log("You have failed the game with: " + _points + " points.");
-        SceneManager.LoadScene("SampleScene");
+        /*while (true)
+        {
+            if (Input.GetKey(KeyCode.Return)) SceneManager.LoadScene("SampleScene");
+        }*/
     }
 }

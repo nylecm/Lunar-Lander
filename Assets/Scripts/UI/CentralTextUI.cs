@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class CentralTextUI : MonoBehaviour
@@ -27,5 +28,6 @@ public class CentralTextUI : MonoBehaviour
         _centralText.text = msg.ToString();
         await Task.Delay(2000);
         _centralText.text = "";
+        if (msg.MSG.Equals("Game Over!")) SceneManager.LoadScene("SampleScene");
     }
 }

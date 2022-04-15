@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using TMPro;
 
@@ -21,8 +22,10 @@ public class CentralTextUI : MonoBehaviour
         _centralText = GetComponent<TextMeshProUGUI>();
     }
 
-    private void UpdateText(LandedCentreMessage msg)
+    private async void UpdateText(LandedCentreMessage msg)
     {
         _centralText.text = msg.ToString();
+        await Task.Delay(2000);
+        _centralText.text = "";
     }
 }

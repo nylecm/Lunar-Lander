@@ -166,6 +166,7 @@ public class Player : MonoBehaviour
             else // Close to impossible (gotta cover all cases).
             {
                 _points += 25;
+                OnLanded?.Invoke(new LandedCentreMessage("Hard Landing :) AND YOU RAN OUT!", 25));
                 HandleGameFailure();
             }
         }
@@ -181,6 +182,7 @@ public class Player : MonoBehaviour
             else // Close to impossible (gotta cover all cases).
             {
                 _points += 100;
+                OnLanded?.Invoke(new LandedCentreMessage("BUTTER :) AND YOU RAN OUT! CRAZY!", 100));
                 HandleGameFailure();
             }
         }

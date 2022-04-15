@@ -28,6 +28,6 @@ public class CentralTextUI : MonoBehaviour
         _centralText.text = msg.ToString();
         await Task.Delay(2000);
         _centralText.text = "";
-        if (msg.MSG.Equals("Game Over!")) SceneManager.LoadScene("SampleScene");
+        if (msg.SceneToLoad != null) SceneManager.LoadScene(msg.SceneToLoad);
     }
 }

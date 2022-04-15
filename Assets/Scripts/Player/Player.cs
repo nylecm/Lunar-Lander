@@ -189,7 +189,7 @@ public class Player : MonoBehaviour
 
     private void HandleGameFailure()
     {
-        OnLanded?.Invoke(new LandedCentreMessage("Game Over!", _points));
+        OnLanded?.Invoke(new LandedCentreMessage("Game Over!", _points, "SampleScene"));
         Debug.Log("You have failed the game with: " + _points + " points.");
         /*while (true)
         {

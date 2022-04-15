@@ -14,5 +14,4 @@ public class ProfileSelectMenuController : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
-
 }

@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
         _lander = LanderManager.GetCurLander();
         if (_lander == null)
         {
-            LanderManager.SetCurLander("Luna");
+            LanderManager.SetCurLander("UFO");
             _lander = LanderManager.GetCurLander();
             Debug.Assert(_lander != null);
         }
@@ -63,10 +63,20 @@ public class Player : MonoBehaviour
         _particleSystem.Stop();
         _rb2 = GetComponent<Rigidbody2D>();
         _transform = GetComponent<Transform>();
+
+        if (_lander != null) SetConstantsForLoadedLander();
+        
         EnterStartingPosition();
         OnFuelChange?.Invoke(300); // TODO GET STARTING FUEL HERE PROGRAMMATICALLY.
         OnHSpeedChange?.Invoke(_velocity.x);
         OnVSpeedChange?.Invoke(_velocity.y);
+    }
+
+    private void SetConstantsForLoadedLander()
+    {
+        Debug.Log("_lander.thrustMultiplier" + _lander.thrustMultiplier);
+        _thrustVelocityIncrement *= _lander.thrustMultiplier;
+        Debug.Log("_thrustVelocityIncrement" + _thrustVelocityIncrement);
     }
 
     private void EnterStartingPosition()

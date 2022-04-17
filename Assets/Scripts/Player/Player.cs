@@ -23,21 +23,19 @@ public class Player : MonoBehaviour
 
     private Vector2 _velocity;
     private float _curAngle;
-    private const float RotIncrement = 64f;
-    private const float ThrustVelocityIncrement = 6f; // Thrust Added Per Second
     private const int FuelConsumptionIncrement = 15;
     private int _points;
 
     private AchievementManager _achievementManager;
-    // private const int OutOfFuelAchievementID = 0;
-    // private const int HardLandingAchievementID = 1;
-    // private const int SoftLandingAchievementID = 2;
-    // private const int ButterLandingAchievementID = 3;
+    
+    private LanderModel _lander;
+    private float _rotIncrement = 64f;
+    private float _thrustVelocityIncrement = 6f; // Thrust Added Per Second
+    private float _hardLandingVSpeedThresh = -1.5f;
+    private float _softLandingVSpeedThresh = -0.7f;
 
     private const int HardLandingPoints = 25;
     private const int SoftLandingPoints = 100;
-    private const float HardLandingVSpeedThresh = -1.5f;
-    private const float SoftLandingVSpeedThresh = -0.7f;
 
     public static event Action<float> OnFuelChange;
     public static event Action<float> OnVSpeedChange;
@@ -51,6 +49,9 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        LanderManager.GetLander("UFO");
+        //ScriptableObject.CreateInstance<LanderModel>();
+        
         _particleSystem = GetComponentInChildren<ParticleSystem>();
         _particleSystem.Stop();
         _rb2 = GetComponent<Rigidbody2D>();
@@ -71,12 +72,11 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-
     private void Update()
     {
         float deltaTime = Time.deltaTime;
-        float adjustedRotationIncrement = RotIncrement * deltaTime;
-        float adjustedThrustVelocityIncrement = ThrustVelocityIncrement * Time.deltaTime;
+        float adjustedRotationIncrement = _rotIncrement * deltaTime;
+        float adjustedThrustVelocityIncrement = _thrustVelocityIncrement * Time.deltaTime;
         float adjustedFuelConsumptionIncrement = FuelConsumptionIncrement * deltaTime;
         //_curPos = _rb2.position;
 
@@ -160,13 +160,13 @@ public class Player : MonoBehaviour
             Debug.Log("Landing Angle to Extreme: " + _curAngle);
             HandleGameFailure();
         }
-        else if (_rb2.velocity.y < HardLandingVSpeedThresh) // FAILURE: vertical speed greater than approx. 300 ft/m
+        else if (_rb2.velocity.y < _hardLandingVSpeedThresh) // FAILURE: vertical speed greater than approx. 300 ft/m
         {
             Debug.Log(_rb2.velocity.y + "Bang!!!");
             HandleGameFailure();
         }
         else if
-            (_rb2.velocity.y < SoftLandingVSpeedThresh) // HARD LANDING: vertical speed approx. between 150 & 300 ft/m
+            (_rb2.velocity.y < _softLandingVSpeedThresh) // HARD LANDING: vertical speed approx. between 150 & 300 ft/m
         {
             Debug.Log(_rb2.velocity.y + "Hard Landing!");
             if (fuelSupply > 0)

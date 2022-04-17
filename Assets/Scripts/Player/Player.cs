@@ -202,6 +202,11 @@ public class Player : MonoBehaviour
 
     private void HandleGameFailure() // TODO fixme bug when rocket bounces on landing. Maybe use a queue of some kind.
     {
+        if (ProfileManager.CurProfile.HighScore < _points)
+        {
+            ProfileManager.CurProfile.HighScore = _points;
+            ProfileManager.CurProfile.Save();
+        } 
         OnLanded?.Invoke(new CentreMessage("Game Over!", _points, "SampleScene"));
         Debug.Log("You have failed the game with: " + _points + " points.");
     }

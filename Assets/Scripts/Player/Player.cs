@@ -173,12 +173,14 @@ public class Player : MonoBehaviour
             {
                 _points += HardLandingPoints;
                 OnLanded?.Invoke(new CentreMessage("Hard Landing", HardLandingPoints));
+                ProfileManager.CurProfile.NumberOfLandings += 1;
                 EnterStartingPosition();
             }
             else // Close to impossible (gotta cover all cases).
             {
                 _points += HardLandingPoints;
                 OnLanded?.Invoke(new CentreMessage("Hard Landing :) AND YOU RAN OUT!", HardLandingPoints));
+                ProfileManager.CurProfile.NumberOfLandings += 1;
                 HandleGameFailure();
             }
         }
@@ -189,12 +191,14 @@ public class Player : MonoBehaviour
             {
                 _points += SoftLandingPoints;
                 OnLanded?.Invoke(new CentreMessage("BUTTER :)", SoftLandingPoints));
+                ProfileManager.CurProfile.NumberOfLandings += 1;
                 EnterStartingPosition();
             }
             else // Close to impossible (gotta cover all cases).
             {
                 _points += SoftLandingPoints;
                 OnLanded?.Invoke(new CentreMessage("BUTTER :) AND YOU RAN OUT! CRAZY!", SoftLandingPoints));
+                ProfileManager.CurProfile.NumberOfLandings += 1;
                 HandleGameFailure();
             }
         }
@@ -205,8 +209,8 @@ public class Player : MonoBehaviour
         if (ProfileManager.CurProfile.HighScore < _points)
         {
             ProfileManager.CurProfile.HighScore = _points;
-            ProfileManager.CurProfile.Save();
         } 
+        ProfileManager.CurProfile.Save();
         OnLanded?.Invoke(new CentreMessage("Game Over!", _points, "SampleScene"));
         Debug.Log("You have failed the game with: " + _points + " points.");
     }

@@ -18,5 +18,6 @@ public class ProfileSummaryFiller : MonoBehaviour
         var components = GetComponentsInChildren<TextMeshProUGUI>();
         components[0].text = "Profile 1 - " + profile.Username;
         components[2].text = "High Score: " + profile.HighScore;
+        components[3].text = "No. Of Landings: " + profile.NumberOfLandings;
     }
 }

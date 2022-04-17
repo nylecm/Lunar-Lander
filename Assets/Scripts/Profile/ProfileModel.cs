@@ -16,7 +16,7 @@ public class ProfileModel
     public int NumberOfLandings { get; set; }
     public float[] LastLandingsVSpeeds { get; set; }
     public int[] LastScores { get; set; }
-    public List<AchievementModel> AchievementsUnlocked { get; }
+    //public List<AchievementModel> AchievementsUnlocked { get; }
 
     public ProfileModel(int id, string username, int highScore, int numberOfLandings, float[] lastLandingsVSpeeds,
         int[] lastScores, List<AchievementModel> achievementsUnlocked)
@@ -27,7 +27,7 @@ public class ProfileModel
         NumberOfLandings = numberOfLandings;
         LastLandingsVSpeeds = lastLandingsVSpeeds;
         LastScores = lastScores;
-        AchievementsUnlocked = achievementsUnlocked;
+        //AchievementsUnlocked = achievementsUnlocked;
     }
 
     public ProfileModel(int id)
@@ -47,7 +47,7 @@ public class ProfileModel
             NumberOfLandings = profileFromFile.NumberOfLandings;
             LastLandingsVSpeeds = profileFromFile.LastLandingsVSpeeds;
             LastScores = profileFromFile.LastScores;
-            AchievementsUnlocked = profileFromFile.AchievementsUnlocked;
+            //AchievementsUnlocked = profileFromFile.AchievementsUnlocked;
         }
         catch (Exception)
         {
@@ -106,7 +106,7 @@ public class ProfileModel
         return true;
     }
 
-    private static bool DoesProfileExist(int id)
+    public static bool DoesProfileExist(int id)
     {
         return File.Exists(GetSavePath(id));
     }

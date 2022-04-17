@@ -19,8 +19,13 @@ public class AchievementManager : MonoBehaviour
 
     private void UnlockAchievement(AchievementModel achievement)
     {
-        // todo Do the work to asynchronously unlock the achievement.
+        // if (ProfileManager.CurProfile.AchievementsUnlocked.Contains(achievement))
+        // {
+        //     ProfileManager.CurProfile.AchievementsUnlocked.Add(achievement);
+        //     ProfileManager.CurProfile.Save();
         Debug.Log("Achievement Unlocked: " + achievement.GetId());
+        // }
+        // todo Do the work to asynchronously unlock the achievement.
     }
 
     private IEnumerator AchievementQueueCheck()

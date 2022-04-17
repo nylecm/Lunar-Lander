@@ -1,6 +1,8 @@
 using System;
 using JetBrains.Annotations;
+using UnityEditor.VersionControl;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 /**
  * I am implementing a Lunar Lander Game.
@@ -27,7 +29,7 @@ public class Player : MonoBehaviour
     private int _points;
 
     private AchievementManager _achievementManager;
-    
+
     private LanderModel _lander;
     private float _rotIncrement = 64f;
     private float _thrustVelocityIncrement = 6f; // Thrust Added Per Second
@@ -49,9 +51,14 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        LanderManager.GetLander("UFO");
-        //ScriptableObject.CreateInstance<LanderModel>();
-        
+        _lander = LanderManager.GetCurLander();
+        if (_lander == null)
+        {
+            LanderManager.SetCurLander("Luna");
+            _lander = LanderManager.GetCurLander();
+            Debug.Assert(_lander != null);
+        }
+
         _particleSystem = GetComponentInChildren<ParticleSystem>();
         _particleSystem.Stop();
         _rb2 = GetComponent<Rigidbody2D>();
@@ -84,7 +91,7 @@ public class Player : MonoBehaviour
             AddThrust(adjustedThrustVelocityIncrement, adjustedFuelConsumptionIncrement);
         else
             _particleSystem.Stop();
-        
+
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) RotateACW(adjustedRotationIncrement);
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) RotateCW(adjustedRotationIncrement);
 
@@ -209,7 +216,8 @@ public class Player : MonoBehaviour
         if (ProfileManager.CurProfile.HighScore < _points)
         {
             ProfileManager.CurProfile.HighScore = _points;
-        } 
+        }
+
         ProfileManager.CurProfile.Save();
         OnLanded?.Invoke(new CentreMessage("Game Over!", _points, "SampleScene"));
         Debug.Log("You have failed the game with: " + _points + " points.");

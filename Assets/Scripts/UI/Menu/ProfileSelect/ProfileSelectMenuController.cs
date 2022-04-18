@@ -21,7 +21,7 @@ public class ProfileSelectMenuController : MonoBehaviour
         }
 
         Debug.Log(ProfileManager.CurProfile.HighScore);
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("ShipSelectMenu");
     }
 
     private void OnEnable()

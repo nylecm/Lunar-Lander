@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
         _lander = LanderManager.GetCurLander();
         if (_lander == null)
         {
-            LanderManager.SetCurLander("UFO");
+            LanderManager.SetCurLander(LanderManager.MakeLander("UFO"));
             _lander = LanderManager.GetCurLander();
             Debug.Assert(_lander != null);
         }

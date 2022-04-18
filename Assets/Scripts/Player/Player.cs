@@ -64,21 +64,23 @@ public class Player : MonoBehaviour
         _rb2 = GetComponent<Rigidbody2D>();
         _transform = GetComponent<Transform>();
 
-        if (_lander != null) SetConstantsForLoadedLander();
-
-        EnterStartingPosition();
         OnFuelChange?.Invoke(300); // TODO GET STARTING FUEL HERE PROGRAMMATICALLY.
         OnHSpeedChange?.Invoke(_velocity.x);
         OnVSpeedChange?.Invoke(_velocity.y);
+
+        if (_lander != null) SetConstantsForLoadedLander();
+
+        EnterStartingPosition();
     }
 
     private void SetConstantsForLoadedLander()
     {
         _thrustVelocityIncrement *= _lander.thrustMultiplier;
-        _rotIncrement            *= _lander.rotSpeedMultiplier;
+        _rotIncrement *= _lander.rotSpeedMultiplier;
         _hardLandingVSpeedThresh *= _lander.strengthMultiplier;
         _softLandingVSpeedThresh *= _lander.strengthMultiplier;
         fuelSupply *= _lander.fuelTankMultiplier;
+        OnFuelChange?.Invoke(fuelSupply);
         GetComponent<SpriteRenderer>().sprite = _lander.rocketImage;
         // todo spirte...
         // todo sound...

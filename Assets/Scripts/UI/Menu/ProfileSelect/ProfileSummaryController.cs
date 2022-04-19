@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class ProfileSummaryFiller : MonoBehaviour
+public class ProfileSummaryController : MonoBehaviour
 {
     [SerializeField] private int profileID;
 

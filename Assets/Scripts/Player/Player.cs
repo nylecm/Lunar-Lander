@@ -28,6 +28,8 @@ public class Player : MonoBehaviour
     private const int FuelConsumptionIncrement = 15;
     private int _points;
 
+    private bool _hasLandingBeenDetected;
+
     private AchievementManager _achievementManager;
 
     private LanderModel _lander;
@@ -88,6 +90,7 @@ public class Player : MonoBehaviour
 
     private void EnterStartingPosition()
     {
+        _hasLandingBeenDetected = false;
         Debug.Log("You have: " + _points + " points.");
         _transform.position = new Vector3(-20, 25, 0);
         _velocity = new Vector2();
@@ -178,6 +181,9 @@ public class Player : MonoBehaviour
     [UsedImplicitly]
     public void Landed() // todo check if this needs to be public
     {
+        if (_hasLandingBeenDetected) return;
+        _hasLandingBeenDetected = true;
+
         // Classifying the hardness and angle of the landing, note negative velocity.
         if (_curAngle > 10 || _curAngle < -10) // todo extract const
         {
@@ -227,7 +233,14 @@ public class Player : MonoBehaviour
             }
         }
     }
-    
+
+    public void LandedNonBottom()
+    {
+        if (_hasLandingBeenDetected) return;
+        _hasLandingBeenDetected = true;
+        HandleGameFailure();
+    }
+
     private void HandleGameFailure() // TODO fixme bug when rocket bounces on landing. Maybe use a queue of some kind.
     {
         if (ProfileManager.CurProfile.HighScore < _points)

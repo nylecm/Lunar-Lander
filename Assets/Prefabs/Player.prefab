@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 564076329133598327}
   - component: {fileID: 564076329133598088}
   - component: {fileID: 564076329133598324}
-  - component: {fileID: 564076329133598323}
   - component: {fileID: 564076329133598322}
   - component: {fileID: 3503362892194765534}
   m_Layer: 0
@@ -152,18 +151,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxRot: 90
   fuelSupply: 300
---- !u!114 &564076329133598323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 564076329133598089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee25d458ce8cdbc4a96f0e081ef75bfa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &564076329133598322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,6 +192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 564076329186433356}
   - component: {fileID: 564076329186433355}
+  - component: {fileID: 8032333652182610642}
   m_Layer: 0
   m_Name: Collision Detector
   m_TagString: Untagged
@@ -252,6 +240,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &8032333652182610642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564076329186433357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee25d458ce8cdbc4a96f0e081ef75bfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1817051507428972136
 GameObject:
   m_ObjectHideFlags: 0
@@ -5082,8 +5082,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5409895557605907989}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.04, z: 0}
-  m_LocalScale: {x: 4.95, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -2.503, z: 0}
+  m_LocalScale: {x: 5, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 564076329133598325}
   m_RootOrder: 2

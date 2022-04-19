@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [CreateAssetMenu(fileName = "Lander", menuName = "ScriptableObjects/Lander", order = 1)]
 public class LanderModel : ScriptableObject

@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
     private void EnterStartingPosition()
     {
         Debug.Log("You have: " + _points + " points.");
-        _transform.position = new Vector3(-15, 8.5f, 0);
+        _transform.position = new Vector3(-20, 25, 0);
         _velocity = new Vector2();
         _velocity.x = 1.2f;
         _rb2.velocity = _velocity;
@@ -227,7 +227,7 @@ public class Player : MonoBehaviour
             }
         }
     }
-
+    
     private void HandleGameFailure() // TODO fixme bug when rocket bounces on landing. Maybe use a queue of some kind.
     {
         if (ProfileManager.CurProfile.HighScore < _points)

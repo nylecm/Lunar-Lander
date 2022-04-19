@@ -2559,6 +2559,18 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 564076329133598089, guid: 3c52268e26727b543aa42a28ece36f74, type: 3}
   m_PrefabInstance: {fileID: 564076328599964791}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1616816639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616816638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caecd252387948a9865718ce98c41fb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1616816647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3149,7 +3161,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 564076329133598325, guid: 3c52268e26727b543aa42a28ece36f74, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 24.3
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 564076329133598325, guid: 3c52268e26727b543aa42a28ece36f74, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3211,5 +3223,6 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.maxColor.r
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1616306521111076261, guid: 3c52268e26727b543aa42a28ece36f74, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3c52268e26727b543aa42a28ece36f74, type: 3}

@@ -6,8 +6,8 @@ public class CollisionDetector : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D col)
     {
-        SendMessage("Landed");
-        Debug.Log("Hit msg sent");
+        SendMessage("HandleGameFailure"); // todo make this a bad collision detector
+        Debug.Log("Non-Bottom Collision Detector msg sent!");
     }
 
     // private void OnTriggerExit2D(Collider2D other)

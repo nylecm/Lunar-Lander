@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Luna
   m_EditorClassIdentifier: 
   title: Luna
-  description: N/A
+  description: The first Soviet Lunar Lander. Very temperamental, but also quite
+    tough.
   price: 0
   rotSpeedMultiplier: 1
   thrustMultiplier: 1

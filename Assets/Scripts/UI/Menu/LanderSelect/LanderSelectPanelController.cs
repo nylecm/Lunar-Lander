@@ -9,7 +9,7 @@ public class LanderSelectPanelController : MonoBehaviour
     
     private void OnEnable()
     {
-        var components = GetComponentsInChildren<TextMeshProUGUI>(); // todo work out ordering https://answers.unity.com/questions/365397/getcomponentsinchildren-always-the-same-order.html
+        var components = GetComponentsInChildren<TextMeshProUGUI>();
         // 0 => play
         components[1].text = thisLander.title; // 1 => title
         components[2].text = "Rotation: " + thisLander.rotSpeedMultiplier; // 2=> rotation

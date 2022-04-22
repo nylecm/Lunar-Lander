@@ -5,12 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class LanderSelectPanelController : MonoBehaviour
 {
-    [SerializeField] private string landerFileName;
-    private LanderModel thisLander;
+     [SerializeField] private LanderModel thisLander;
     
     private void OnEnable()
     {
-        thisLander = LanderManager.MakeLander(landerFileName);
         var components = GetComponentsInChildren<TextMeshProUGUI>(); // todo work out ordering https://answers.unity.com/questions/365397/getcomponentsinchildren-always-the-same-order.html
         // 0 => play
         components[1].text = thisLander.title; // 1 => title

@@ -6,7 +6,6 @@ public enum AchievementType
     ThreeButtersInARow,
     FiveLandingsInOneGame,
     FirstCrash,
-    AllShipsFlown,
     HighScoreOver200,
     HighScoreOver500,
     CaveLanding,

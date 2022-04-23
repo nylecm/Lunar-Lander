@@ -22,7 +22,7 @@ public class OutOfFuelEvent : MonoBehaviour
 
     private void CheckRocketFuel(float fuel)
     {
-        if (fuel == 0) PerformOutOfFuelActions();
+        if (fuel <= 0) PerformOutOfFuelActions();
     }
 
     private void PerformOutOfFuelActions()

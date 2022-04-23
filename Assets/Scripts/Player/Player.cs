@@ -135,6 +135,7 @@ public class Player : MonoBehaviour
         if (fuelSupply <= 0)
         {
             StopThrustEffects();
+            //OnFuelChange?.Invoke(fuelSupply);
             return;
         }
 
@@ -167,8 +168,6 @@ public class Player : MonoBehaviour
         _rb2.velocity = _velocity;
         fuelSupply -= adjustedFuelConsumptionIncrement;
         OnFuelChange?.Invoke(fuelSupply);
-
-        if (fuelSupply % 100 == 0) Debug.Log("Fuel Supply: " + fuelSupply);
     }
 
     private void StopThrustEffects()

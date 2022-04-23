@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,7 +13,7 @@ public class ProfileSelectMenuController : MonoBehaviour
         }
         else
         {
-            ProfileManager.CurProfile = new ProfileModel(profile, "nylecm", 0, 0, new float[10],
+            ProfileManager.CurProfile = new ProfileModel(profile, 0, 0, new float[10],
                 new[] {100, 50, 25}, new List<AchievementModel>());
             ProfileManager.CurProfile.Save(); 
         }

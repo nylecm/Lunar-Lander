@@ -11,18 +11,16 @@ using UnityEngine.Assertions;
 public class ProfileModel
 {
     public int ID { get; set; } // TODO should this be made private
-    public string Username { get; set; }
     public int HighScore { get; set; }
     public int NumberOfLandings { get; set; }
     public float[] LastLandingsVSpeeds { get; set; }
     public int[] LastScores { get; set; }
     //public List<AchievementModel> AchievementsUnlocked { get; }
 
-    public ProfileModel(int id, string username, int highScore, int numberOfLandings, float[] lastLandingsVSpeeds,
+    public ProfileModel(int id, int highScore, int numberOfLandings, float[] lastLandingsVSpeeds,
         int[] lastScores, List<AchievementModel> achievementsUnlocked)
     {
         ID = id;
-        Username = username;
         HighScore = highScore;
         NumberOfLandings = numberOfLandings;
         LastLandingsVSpeeds = lastLandingsVSpeeds;
@@ -42,7 +40,6 @@ public class ProfileModel
             var profileFromFile = formatter.Deserialize(stream) as ProfileModel;
             Debug.Assert(profileFromFile.ID != null);
             ID = profileFromFile.ID;
-            Username = profileFromFile.Username;
             HighScore = profileFromFile.HighScore;
             NumberOfLandings = profileFromFile.NumberOfLandings;
             LastLandingsVSpeeds = profileFromFile.LastLandingsVSpeeds;

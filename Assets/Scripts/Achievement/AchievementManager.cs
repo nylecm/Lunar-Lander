@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AchievementManager : MonoBehaviour
 {
+    public event Action<AchievementModel> OnAchevementUnlocked; 
+
     private Queue<AchievementModel> _achievementQ = new Queue<AchievementModel>();
 
     /**
@@ -35,12 +38,9 @@ public class AchievementManager : MonoBehaviour
 
     private void ProgressAchievement(AchievementModel achievement)
     {
-        // if (ProfileManager.CurProfile.AchievementsUnlocked.Contains(achievement))
-        // {
-        //     ProfileManager.CurProfile.AchievementsUnlocked.Add(achievement);
-        //     ProfileManager.CurProfile.Save();
         Debug.Log("Achievement Progress Made: Name:" + achievement.Name + " Progress: " + achievement.CurProgress + "/" + achievement.ProgressRequired);
-        // }
+        ProfileManager.CurProfile.Save();
+        OnAchevementUnlocked?.Invoke(achievement);
         // todo Do the work to asynchronously unlock the achievement.
     }
 

@@ -9,14 +9,14 @@ public class CollisionDetector : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.sharedMaterial.name.Equals(_platformMaterial.name))
-        {
+        //if (col.sharedMaterial.name.Equals(_platformMaterial.name))
+        //{
             SendMessageUpwards("LandedNonBottom");
             Debug.Log("Non-Bottom Collision Detector msg sent!");
-        }
-        else
-        {
-            
-        }
+        //}
+        // else
+        // {
+        //     
+        // }
     }
 }

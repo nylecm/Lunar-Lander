@@ -116,8 +116,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            _particleSystem.Stop();
-            _audioSrc.Pause();
+            StopThrustEffects();
         }
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) RotateACW(adjustedRotationIncrement);
@@ -133,6 +132,12 @@ public class Player : MonoBehaviour
      */
     private void AddThrust(float adjustedThrustVelocityIncrement, float adjustedFuelConsumptionIncrement)
     {
+        if (fuelSupply <= 0)
+        {
+            StopThrustEffects();
+            return;
+        }
+
         if (_particleSystem.isStopped)
         {
             _particleSystem.Play();
@@ -142,8 +147,6 @@ public class Player : MonoBehaviour
         {
             _audioSrc.UnPause();
         }
-            
-        if (fuelSupply <= 0) return;
 
         bool posAngle = (_curAngle > 0);
         _velocity = _rb2.velocity;
@@ -166,6 +169,12 @@ public class Player : MonoBehaviour
         OnFuelChange?.Invoke(fuelSupply);
 
         if (fuelSupply % 100 == 0) Debug.Log("Fuel Supply: " + fuelSupply);
+    }
+
+    private void StopThrustEffects()
+    {
+        if (_particleSystem.isPlaying) _particleSystem.Stop();
+        if (_audioSrc.isPlaying) _audioSrc.Pause();
     }
 
     private double ConvertToRadians(double angle)

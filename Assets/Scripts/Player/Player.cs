@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D _rb2;
     private Transform _transform;
+    private AudioSource _audioSrc;
 
     private ParticleSystem _particleSystem;
 
@@ -61,6 +62,8 @@ public class Player : MonoBehaviour
             Debug.Assert(_lander != null);
         }
 
+        _audioSrc = GetComponent<AudioSource>();
+        _audioSrc.Pause();
         _particleSystem = GetComponentInChildren<ParticleSystem>();
         _particleSystem.Stop();
         _rb2 = GetComponent<Rigidbody2D>();
@@ -106,11 +109,16 @@ public class Player : MonoBehaviour
         float adjustedThrustVelocityIncrement = _thrustVelocityIncrement * Time.deltaTime;
         float adjustedFuelConsumptionIncrement = FuelConsumptionIncrement * deltaTime;
         //_curPos = _rb2.position;
-
+        
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        {
             AddThrust(adjustedThrustVelocityIncrement, adjustedFuelConsumptionIncrement);
+        }
         else
+        {
             _particleSystem.Stop();
+            _audioSrc.Pause();
+        }
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) RotateACW(adjustedRotationIncrement);
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) RotateCW(adjustedRotationIncrement);
@@ -130,6 +138,11 @@ public class Player : MonoBehaviour
             _particleSystem.Play();
         }
 
+        if (!_audioSrc.isPlaying)
+        {
+            _audioSrc.UnPause();
+        }
+            
         if (fuelSupply <= 0) return;
 
         bool posAngle = (_curAngle > 0);

@@ -21,4 +21,4 @@ MonoBehaviour:
   strengthMultiplier: 1
   fuelTankMultiplier: 1
   rocketSound: {fileID: 0}
-  rocketImage: {fileID: 21300000, guid: abb32d578af187d46a652fb62d10396e, type: 3}
+  rocketImage: {fileID: 21300000, guid: 12d74d6703028af49b30d3988c74fe2a, type: 3}

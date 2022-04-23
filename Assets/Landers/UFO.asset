@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UFO
   m_EditorClassIdentifier: 
   title: UFO
-  description: N/A
+  description: Classified.
   price: 1600
   rotSpeedMultiplier: 1.6
   thrustMultiplier: 1.8

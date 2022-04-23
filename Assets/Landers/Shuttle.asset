@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shuttle
   m_EditorClassIdentifier: 
   title: Shuttle
-  description: N/A
+  description: A modern, but pretty uninteresting way to reach the Moon.
   price: 1000
   rotSpeedMultiplier: 0.95
   thrustMultiplier: 1.15

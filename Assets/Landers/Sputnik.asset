@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sputnik
   m_EditorClassIdentifier: 
   title: Sputnik
-  description: N/A
+  description: An agile, and sturdy little Russian lander.
   price: 600
   rotSpeedMultiplier: 1
   thrustMultiplier: 1.3

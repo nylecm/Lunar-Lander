@@ -1,17 +1,22 @@
+using System;
+using UnityEditor;
 using UnityEngine;
 
 public class CollisionDetector : MonoBehaviour
 {
-    // private List<GameObject> Colliders = new List<GameObject>();
+    private readonly PhysicsMaterial2D _platformMaterial =
+        AssetDatabase.LoadAssetAtPath<PhysicsMaterial2D>("Assets/Materials/Moon Surface.physicsMaterial2D");
     
     private void OnTriggerEnter2D(Collider2D col)
     {
-        SendMessageUpwards("LandedNonBottom");
-        Debug.Log("Non-Bottom Collision Detector msg sent!");
+        if (col.sharedMaterial.name.Equals(_platformMaterial.name))
+        {
+            SendMessageUpwards("LandedNonBottom");
+            Debug.Log("Non-Bottom Collision Detector msg sent!");
+        }
+        else
+        {
+            
+        }
     }
-
-    // private void OnTriggerExit2D(Collider2D other)
-    // {
-    //     if (Colliders.Contains(other.gameObject)) Colliders.Remove(other.gameObject);
-    // }
 }

@@ -29,7 +29,7 @@ public class OutOfFuelEvent : MonoBehaviour
     {
         Debug.Log("No fuel: Unable to Add Thrust!");
         Debug.Log("Notify Achievement Out of Fuel ID:");
-        _achievementManager.NotifyAchievementComplete("0"); // todo unhardcode the ids maybe use an enum.
+        _achievementManager.NotifyAchievementProgress(AchievementType.OutOfFuel); // todo unhardcode the ids maybe use an enum.
 
         // todo Disable Thrust here
     }

@@ -13,23 +13,18 @@ public class ProfileModel
     public int ID { get; set; } // TODO should this be made private
     public int HighScore { get; set; }
     public int NumberOfLandings { get; set; }
-    public float[] LastLandingsVSpeeds { get; set; }
-    public int[] LastScores { get; set; }
-    //public List<AchievementModel> AchievementsUnlocked { get; }
+    private List<AchievementModel> _achievementProgress = new List<AchievementModel>();
 
-    public ProfileModel(int id, int highScore, int numberOfLandings, float[] lastLandingsVSpeeds,
-        int[] lastScores, List<AchievementModel> achievementsUnlocked)
+    public ProfileModel(int id, int highScore, int numberOfLandings, List<AchievementModel> achievementsUnlocked)
     {
         ID = id;
         HighScore = highScore;
         NumberOfLandings = numberOfLandings;
-        LastLandingsVSpeeds = lastLandingsVSpeeds;
-        LastScores = lastScores;
-        //AchievementsUnlocked = achievementsUnlocked;
     }
 
     public ProfileModel(int id)
     {
+        // construct profile by loading from file
         if (!DoesProfileExist(id))
             throw new ArgumentException("Profile " + id + " that you are trying to load does not exist.");
 
@@ -42,15 +37,12 @@ public class ProfileModel
             ID = profileFromFile.ID;
             HighScore = profileFromFile.HighScore;
             NumberOfLandings = profileFromFile.NumberOfLandings;
-            LastLandingsVSpeeds = profileFromFile.LastLandingsVSpeeds;
-            LastScores = profileFromFile.LastScores;
-            //AchievementsUnlocked = profileFromFile.AchievementsUnlocked;
+            _achievementProgress = profileFromFile._achievementProgress;
         }
         catch (Exception)
         {
             throw new ArgumentException("Profile " + id + " deserialization failure.");
         }
-        // construct by loading from file
     }
 
     public bool Save()
@@ -69,7 +61,7 @@ public class ProfileModel
 
         return false;
     }
-    
+
     public static ProfileModel Load(int id)
     {
         if (!DoesProfileExist(id))
@@ -101,6 +93,27 @@ public class ProfileModel
         }
 
         return true;
+    }
+
+    public AchievementModel GetAchievementOfType(AchievementType achievementType)
+    {
+        for (int i = 0; i < _achievementProgress.Count; i++)
+        {
+            if (_achievementProgress[i].AchievementType == achievementType) return _achievementProgress[i];
+        }
+
+        return null;
+    }
+
+    public void AddAchievement(AchievementModel achievementModel)
+    {
+        for (int i = 0; i < _achievementProgress.Count; i++)
+        {
+            if (_achievementProgress[i].AchievementType == achievementModel.AchievementType)
+                _achievementProgress.Remove(_achievementProgress[i]);
+        }
+
+        _achievementProgress.Add(achievementModel);
     }
 
     public static bool DoesProfileExist(int id)

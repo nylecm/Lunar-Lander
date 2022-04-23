@@ -6,9 +6,25 @@ public class AchievementManager : MonoBehaviour
 {
     private Queue<AchievementModel> _achievementQ = new Queue<AchievementModel>();
 
-    public void NotifyAchievementComplete(string id)
+    /**
+     * Method called when achievement progress is made.
+     */
+    public void NotifyAchievementProgress(AchievementType achievementType)
     {
-        _achievementQ.Enqueue(new AchievementModel(id));
+        // cur profile has not made progress on this achievement:
+        if (ProfileManager.CurProfile.GetAchievementOfType(achievementType) == null) 
+        {
+            AchievementModel achievement = AchievementFactory.MakeAchievementOfType(achievementType);
+            achievement.AddProgress();
+            _achievementQ.Enqueue(achievement);
+        }
+        else // cur profile has already made progress on this achievement:
+        {
+            AchievementModel achievement = ProfileManager.CurProfile.GetAchievementOfType(achievementType);
+            achievement.AddProgress();
+            ProfileManager.CurProfile.AddAchievement(achievement);
+            _achievementQ.Enqueue(achievement);
+        }
     }
 
     // Start is called before the first frame update
@@ -17,13 +33,13 @@ public class AchievementManager : MonoBehaviour
         StartCoroutine("AchievementQueueCheck");
     }
 
-    private void UnlockAchievement(AchievementModel achievement)
+    private void ProgressAchievement(AchievementModel achievement)
     {
         // if (ProfileManager.CurProfile.AchievementsUnlocked.Contains(achievement))
         // {
         //     ProfileManager.CurProfile.AchievementsUnlocked.Add(achievement);
         //     ProfileManager.CurProfile.Save();
-        Debug.Log("Achievement Unlocked: " + achievement.GetId());
+        Debug.Log("Achievement Progress Made: Name:" + achievement.Name + " Progress: " + achievement.CurProgress + "/" + achievement.ProgressRequired);
         // }
         // todo Do the work to asynchronously unlock the achievement.
     }
@@ -32,7 +48,7 @@ public class AchievementManager : MonoBehaviour
     {
         for (;;)
         {
-            if (_achievementQ.Count > 0) UnlockAchievement(_achievementQ.Dequeue());
+            if (_achievementQ.Count > 0) ProgressAchievement(_achievementQ.Dequeue());
             yield return new WaitForSeconds(5f);
         }
     }

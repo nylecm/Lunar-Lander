@@ -13,8 +13,7 @@ public class ProfileSelectMenuController : MonoBehaviour
         }
         else
         {
-            ProfileManager.CurProfile = new ProfileModel(profile, 0, 0, new float[10],
-                new[] {100, 50, 25}, new List<AchievementModel>());
+            ProfileManager.CurProfile = new ProfileModel(profile, 0, 0, new List<AchievementModel>());
             ProfileManager.CurProfile.Save(); 
         }
 

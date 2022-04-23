@@ -1,14 +1,29 @@
+using System;
+
+[Serializable]
 public class AchievementModel
 {
-    private readonly string _id;
+    public AchievementType AchievementType { get; }
+    public string Name { get; }
+    public string Description { get; }
+    public int CurProgress { get; private set; } = 0;
+    public int ProgressRequired { get; }
 
-    public AchievementModel(string id)
+    public AchievementModel(AchievementType achievementType, string name, string description, int progressRequired)
     {
-        _id = id;
+        AchievementType = achievementType;
+        Name = name;
+        Description = description;
+        ProgressRequired = progressRequired;
     }
 
-    public string GetId()
+    public bool IsComplete()
     {
-        return _id;
+        return CurProgress >= ProgressRequired;
+    }
+
+    public void AddProgress()
+    {
+        CurProgress++;
     }
 }

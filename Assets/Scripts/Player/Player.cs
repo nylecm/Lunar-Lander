@@ -45,6 +45,8 @@ public class Player : MonoBehaviour
     public static event Action<float> OnFuelChange;
     public static event Action<float> OnVSpeedChange;
     public static event Action<float> OnHSpeedChange;
+    public static event Action OnHardLanding;
+    public static event Action OnSoftLanding;
     public static event Action<CentreMessage> OnLanded;
 
     private void Start()
@@ -109,7 +111,7 @@ public class Player : MonoBehaviour
         float adjustedThrustVelocityIncrement = _thrustVelocityIncrement * Time.deltaTime;
         float adjustedFuelConsumptionIncrement = FuelConsumptionIncrement * deltaTime;
         //_curPos = _rb2.position;
-        
+
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             AddThrust(adjustedThrustVelocityIncrement, adjustedFuelConsumptionIncrement);
@@ -223,6 +225,7 @@ public class Player : MonoBehaviour
             if (fuelSupply > 0)
             {
                 _points += HardLandingPoints;
+                OnHardLanding?.Invoke();
                 OnLanded?.Invoke(new CentreMessage("Hard Landing", HardLandingPoints));
                 ProfileManager.CurProfile.NumberOfLandings += 1;
                 EnterStartingPosition();
@@ -230,7 +233,8 @@ public class Player : MonoBehaviour
             else // Close to impossible (gotta cover all cases).
             {
                 _points += HardLandingPoints;
-                OnLanded?.Invoke(new CentreMessage("Hard Landing :) AND YOU RAN OUT!", HardLandingPoints));
+                OnHardLanding?.Invoke();
+                OnLanded?.Invoke(new CentreMessage("Hard Landing", HardLandingPoints));
                 ProfileManager.CurProfile.NumberOfLandings += 1;
                 HandleGameFailure();
             }
@@ -241,14 +245,16 @@ public class Player : MonoBehaviour
             if (fuelSupply > 0)
             {
                 _points += SoftLandingPoints;
-                OnLanded?.Invoke(new CentreMessage("BUTTER :)", SoftLandingPoints));
+                OnSoftLanding?.Invoke();
+                OnLanded?.Invoke(new CentreMessage("Hard Landing", HardLandingPoints));
                 ProfileManager.CurProfile.NumberOfLandings += 1;
                 EnterStartingPosition();
             }
             else // Close to impossible (gotta cover all cases).
             {
                 _points += SoftLandingPoints;
-                OnLanded?.Invoke(new CentreMessage("BUTTER :) AND YOU RAN OUT! CRAZY!", SoftLandingPoints));
+                OnSoftLanding?.Invoke();
+                OnLanded?.Invoke(new CentreMessage("Hard Landing", HardLandingPoints));
                 ProfileManager.CurProfile.NumberOfLandings += 1;
                 HandleGameFailure();
             }

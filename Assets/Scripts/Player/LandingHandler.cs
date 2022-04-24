@@ -25,6 +25,7 @@ public class LandingHandler : MonoBehaviour
 
     private void HandleHardLanding()
     {
+        Debug.Log("Notify Hard Landing");
         _landingsInARow++;
         if (_landingsInARow == 5) _achievementManager.NotifyAchievementProgress(AchievementType.FiveLandingsInOneGame);
         _achievementManager.NotifyAchievementProgress(AchievementType.TenthLanding);
@@ -34,6 +35,7 @@ public class LandingHandler : MonoBehaviour
 
     private void HandleSoftLanding()
     {
+        Debug.Log("Notify Soft Landing");
         _landingsInARow++;
         _softLandingsInARow++;
         if (_landingsInARow == 5) _achievementManager.NotifyAchievementProgress(AchievementType.FiveLandingsInOneGame);

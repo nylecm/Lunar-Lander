@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Numerics;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
@@ -116,9 +117,14 @@ public class ProfileModel
         _achievementProgress.Add(achievementModel);
     }
 
-    public int NumberOfAchievementsUnlocked()
+    public int NumberOfAchievementsInProgress()
     {
         return _achievementProgress.Count;
+    }
+
+    public int NumberOfAchievementsUnlocked()
+    {
+        return _achievementProgress.Count(achievement => achievement.IsComplete());
     }
 
     public static bool DoesProfileExist(int id)

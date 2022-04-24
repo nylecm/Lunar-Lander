@@ -19,9 +19,14 @@ public class AchievementManager : MonoBehaviour
         {
             AchievementModel achievement = AchievementFactory.MakeAchievementOfType(achievementType);
             achievement.AddProgress();
+            ProfileManager.CurProfile.AddAchievement(achievement);
             _achievementQ.Enqueue(achievement);
         }
-        else // cur profile has already made progress on this achievement:
+        // cur profile has already completed this achievement:
+        else if (ProfileManager.CurProfile.GetAchievementOfType(achievementType).IsComplete())
+        {
+            Debug.Log("Achievement: " + ProfileManager.CurProfile.GetAchievementOfType(achievementType).Name + " is already completed.");
+        } else // cur profile has already made progress on this achievement:
         {
             AchievementModel achievement = ProfileManager.CurProfile.GetAchievementOfType(achievementType);
             achievement.AddProgress();
@@ -38,8 +43,8 @@ public class AchievementManager : MonoBehaviour
 
     private void ProgressAchievement(AchievementModel achievement)
     {
-        Debug.Log("Achievement Progress Made: Name:" + achievement.Name + " Progress: " + achievement.CurProgress + "/" + achievement.ProgressRequired);
         ProfileManager.CurProfile.Save();
+        Debug.Log("Achievement Progress Made: Name:" + achievement.Name + " Progress: " + achievement.CurProgress + "/" + achievement.ProgressRequired);
         OnAchievementUnlocked?.Invoke(achievement);
         // todo Do the work to asynchronously unlock the achievement.
     }

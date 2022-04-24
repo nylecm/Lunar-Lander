@@ -116,6 +116,11 @@ public class ProfileModel
         _achievementProgress.Add(achievementModel);
     }
 
+    public int NumberOfAchievementsUnlocked()
+    {
+        return _achievementProgress.Count;
+    }
+
     public static bool DoesProfileExist(int id)
     {
         return File.Exists(GetSavePath(id));

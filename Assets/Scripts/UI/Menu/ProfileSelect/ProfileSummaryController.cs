@@ -14,5 +14,6 @@ public class ProfileSummaryController : MonoBehaviour
         var components = GetComponentsInChildren<TextMeshProUGUI>();
         components[2].text = "High Score: " + profile.HighScore;
         components[3].text = "No. Of Landings: " + profile.NumberOfLandings;
+        components[4].text = profile.NumberOfAchievementsUnlocked().ToString();
     }
 }

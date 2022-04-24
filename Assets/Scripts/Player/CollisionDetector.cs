@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CollisionDetector : MonoBehaviour
 {
-    private readonly PhysicsMaterial2D _platformMaterial =
-        AssetDatabase.LoadAssetAtPath<PhysicsMaterial2D>("Assets/Materials/Moon Surface.physicsMaterial2D");
+    // private readonly PhysicsMaterial2D _platformMaterial =
+    //     AssetDatabase.LoadAssetAtPath<PhysicsMaterial2D>("Assets/Materials/Moon Surface.physicsMaterial2D");
     
     private void OnTriggerEnter2D(Collider2D col)
     {

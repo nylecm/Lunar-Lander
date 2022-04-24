@@ -47,8 +47,8 @@ public class Player : MonoBehaviour
     public static event Action<float> OnHSpeedChange;
     public static event Action OnHardLanding;
     public static event Action OnSoftLanding;
-    public static event Action<CentreMessage> OnLanded;
-
+    public static event Action<CentreMessage> OnTouchDown;
+    
     private void Start()
     {
         _achievementManager = FindObjectOfType<AchievementManager>();
@@ -226,7 +226,7 @@ public class Player : MonoBehaviour
             {
                 _points += HardLandingPoints;
                 OnHardLanding?.Invoke();
-                OnLanded?.Invoke(new CentreMessage("Hard Landing", HardLandingPoints));
+                OnTouchDown?.Invoke(new CentreMessage("Hard Landing", HardLandingPoints));
                 ProfileManager.CurProfile.NumberOfLandings += 1;
                 EnterStartingPosition();
             }
@@ -234,7 +234,7 @@ public class Player : MonoBehaviour
             {
                 _points += HardLandingPoints;
                 OnHardLanding?.Invoke();
-                OnLanded?.Invoke(new CentreMessage("Hard Landing", HardLandingPoints));
+                OnTouchDown?.Invoke(new CentreMessage("Hard Landing", HardLandingPoints));
                 ProfileManager.CurProfile.NumberOfLandings += 1;
                 HandleGameFailure();
             }
@@ -246,7 +246,7 @@ public class Player : MonoBehaviour
             {
                 _points += SoftLandingPoints;
                 OnSoftLanding?.Invoke();
-                OnLanded?.Invoke(new CentreMessage("BUTTER :)", SoftLandingPoints));
+                OnTouchDown?.Invoke(new CentreMessage("BUTTER :)", SoftLandingPoints));
                 ProfileManager.CurProfile.NumberOfLandings += 1;
                 EnterStartingPosition();
             }
@@ -254,7 +254,7 @@ public class Player : MonoBehaviour
             {
                 _points += SoftLandingPoints;
                 OnSoftLanding?.Invoke();
-                OnLanded?.Invoke(new CentreMessage("BUTTER :)", SoftLandingPoints));
+                OnTouchDown?.Invoke(new CentreMessage("BUTTER :)", SoftLandingPoints));
                 ProfileManager.CurProfile.NumberOfLandings += 1;
                 HandleGameFailure();
             }
@@ -276,7 +276,7 @@ public class Player : MonoBehaviour
         }
 
         ProfileManager.CurProfile.Save();
-        OnLanded?.Invoke(new CentreMessage("Game Over!", _points, "SampleScene"));
+        OnTouchDown?.Invoke(new CentreMessage("Game Over!", _points, "SampleScene"));
         Debug.Log("You have failed the game with: " + _points + " points.");
     }
 }

@@ -10,12 +10,12 @@ public class CentralTextUI : MonoBehaviour
 
     private void OnEnable()
     {
-        Player.OnLanded += UpdateText;
+        Player.OnTouchDown += UpdateText;
     }
 
     private void OnDisable()
     {
-        Player.OnLanded -= UpdateText;
+        Player.OnTouchDown -= UpdateText;
     }
 
     private void Awake()

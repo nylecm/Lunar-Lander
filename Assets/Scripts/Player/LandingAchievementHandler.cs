@@ -1,15 +1,17 @@
+using System;
 using UnityEngine;
 
-public class LandingHandler : MonoBehaviour
+public class LandingAchievementHandler : MonoBehaviour
 {
     private AchievementManager _achievementManager;
-    private int _softLandingsInARow = 0;
-    private int _landingsInARow = 0;
-
+    private int _softLandingsInARow;
+    private int _landingsInARow;
+    
     private void OnEnable()
     {
         Player.OnHardLanding += HandleHardLanding;
         Player.OnSoftLanding += HandleSoftLanding;
+        Player.OnTouchDown += HandleTouchDown;
     }
 
     private void OnDisable()
@@ -28,9 +30,7 @@ public class LandingHandler : MonoBehaviour
         Debug.Log("Notify Hard Landing");
         _landingsInARow++;
         if (_landingsInARow == 5) _achievementManager.NotifyAchievementProgress(AchievementType.FiveLandingsInOneGame);
-        _achievementManager.NotifyAchievementProgress(AchievementType.TenthLanding);
-        _achievementManager.NotifyAchievementProgress(AchievementType.FiftiethLanding);
-        _achievementManager.NotifyAchievementProgress(AchievementType.HundredthLanding);
+        HandleLandingAchievements();
     }
 
     private void HandleSoftLanding()
@@ -41,8 +41,20 @@ public class LandingHandler : MonoBehaviour
         if (_landingsInARow == 5) _achievementManager.NotifyAchievementProgress(AchievementType.FiveLandingsInOneGame);
         if (_softLandingsInARow == 3) _achievementManager.NotifyAchievementProgress(AchievementType.ThreeButtersInARow);
         _achievementManager.NotifyAchievementProgress(AchievementType.Butter);
+        HandleLandingAchievements();
+    }
+
+    private void HandleLandingAchievements()
+    {
+        _achievementManager.NotifyAchievementProgress(AchievementType.FirstLanding);
         _achievementManager.NotifyAchievementProgress(AchievementType.TenthLanding);
         _achievementManager.NotifyAchievementProgress(AchievementType.FiftiethLanding);
         _achievementManager.NotifyAchievementProgress(AchievementType.HundredthLanding);
+    }
+
+    private void HandleTouchDown(CentreMessage centreMessage)
+    {
+        if (centreMessage.Points >= 200) _achievementManager.NotifyAchievementProgress(AchievementType.HighScoreOver200);
+        if (centreMessage.Points >= 500) _achievementManager.NotifyAchievementProgress(AchievementType.HighScoreOver500);
     }
 }

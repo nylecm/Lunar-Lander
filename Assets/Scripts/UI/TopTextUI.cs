@@ -28,13 +28,8 @@ public class TopTextUI : MonoBehaviour
         if (achievementModel.IsComplete())
         {
             _topText.text = "Achievement Unlocked:\n" + achievementModel.Name + "!";
+            await Task.Delay(2000);
+            _topText.text = "";
         }
-        else
-        {
-            _topText.text = "Achievement Progress:\n" + achievementModel.Name + " " + achievementModel.CurProgress +
-                            "/" + achievementModel.ProgressRequired + ".";
-        }
-        await Task.Delay(2000);
-        _topText.text = "";
     }
 }

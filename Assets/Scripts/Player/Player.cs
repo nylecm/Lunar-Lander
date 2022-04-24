@@ -246,7 +246,7 @@ public class Player : MonoBehaviour
             {
                 _points += SoftLandingPoints;
                 OnSoftLanding?.Invoke();
-                OnLanded?.Invoke(new CentreMessage("Hard Landing", HardLandingPoints));
+                OnLanded?.Invoke(new CentreMessage("BUTTER :)", SoftLandingPoints));
                 ProfileManager.CurProfile.NumberOfLandings += 1;
                 EnterStartingPosition();
             }
@@ -254,7 +254,7 @@ public class Player : MonoBehaviour
             {
                 _points += SoftLandingPoints;
                 OnSoftLanding?.Invoke();
-                OnLanded?.Invoke(new CentreMessage("Hard Landing", HardLandingPoints));
+                OnLanded?.Invoke(new CentreMessage("BUTTER :)", SoftLandingPoints));
                 ProfileManager.CurProfile.NumberOfLandings += 1;
                 HandleGameFailure();
             }

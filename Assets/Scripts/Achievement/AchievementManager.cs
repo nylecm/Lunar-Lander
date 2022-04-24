@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AchievementManager : MonoBehaviour
 {
-    public event Action<AchievementModel> OnAchievementUnlocked; 
+    public static event Action<AchievementModel> OnAchievementProgress; 
 
     private Queue<AchievementModel> _achievementQ = new Queue<AchievementModel>();
 
@@ -45,7 +45,7 @@ public class AchievementManager : MonoBehaviour
     {
         ProfileManager.CurProfile.Save();
         Debug.Log("Achievement Progress Made: Name:" + achievement.Name + " Progress: " + achievement.CurProgress + "/" + achievement.ProgressRequired);
-        OnAchievementUnlocked?.Invoke(achievement);
+        OnAchievementProgress?.Invoke(achievement);
         // todo Do the work to asynchronously unlock the achievement.
     }
 

@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
 
     private bool _hasLandingBeenDetected;
 
-    private AchievementManager _achievementManager;
+    //private AchievementManager _achievementManager;
 
     private LanderModel _lander;
     private float _rotIncrement = 64f;
@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
     
     private void Start()
     {
-        _achievementManager = FindObjectOfType<AchievementManager>();
+        //_achievementManager = FindObjectOfType<AchievementManager>();
     }
 
     private void Awake()
@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
         _rb2 = GetComponent<Rigidbody2D>();
         _transform = GetComponent<Transform>();
 
-        OnFuelChange?.Invoke(300); // TODO GET STARTING FUEL HERE PROGRAMMATICALLY.
+        OnFuelChange?.Invoke(LanderManager.GetCurLander().fuelTankMultiplier * fuelSupply);
         OnHSpeedChange?.Invoke(_velocity.x);
         OnVSpeedChange?.Invoke(_velocity.y);
 

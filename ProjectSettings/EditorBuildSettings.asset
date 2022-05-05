@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ShipSelectMenu.unity
     guid: fdeb75900082f0741afff2cd5052a367
+  - enabled: 1
+    path: Assets/Scenes/AchievementViewer.unity
+    guid: 90c12d0b988e8354083c72cfc87f5d30
   m_configObjects: {}

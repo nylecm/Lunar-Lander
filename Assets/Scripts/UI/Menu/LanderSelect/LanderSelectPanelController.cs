@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LanderSelectPanelController : MonoBehaviour
 {
-     [SerializeField] private LanderModel thisLander;
+    [SerializeField] private LanderModel thisLander;
     
     private void OnEnable()
     {

@@ -9,11 +9,16 @@ public class CollisionDetector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        //if (col.sharedMaterial.name.Equals(_platformMaterial.name))
-        //{
         if (col.gameObject.GetComponent<PowerUpDot>() != null)
         {
-            Debug.Log("bah");
+            if (col.gameObject.GetComponent<PowerUpDot>().PowerUpType == PowerUpType.FUEL)
+            {
+                SendMessageUpwards("HandleFuelPowerUp");
+            }
+            else if (col.gameObject.GetComponent<PowerUpDot>().PowerUpType == PowerUpType.STOP)
+            {
+                SendMessageUpwards("HandleStopPowerUp");
+            }
         }
         else
         {

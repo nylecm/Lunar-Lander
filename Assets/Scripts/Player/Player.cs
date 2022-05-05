@@ -279,4 +279,14 @@ public class Player : MonoBehaviour
         OnTouchDown?.Invoke(new CentreMessage("Game Over!", _points, "SampleScene"));
         Debug.Log("You have failed the game with: " + _points + " points.");
     }
+
+    public void HandleFuelPowerUp()
+    {
+        fuelSupply += 100;
+    }
+
+    public void HandleStopPowerUp()
+    {
+        _rb2.velocity = new Vector2(0, 0);
+    }
 }

@@ -4,6 +4,8 @@ using Random = UnityEngine.Random;
 
 public class PowerUpDot : MonoBehaviour
 {
+    //public 
+    
     private void OnEnable()
     {
         int x = Random.Range(1, 16);
@@ -19,4 +21,10 @@ public class PowerUpDot : MonoBehaviour
             // stop power-up
         }
     }
+}
+
+public enum PowerUpType
+{
+    FUEL,
+    STOP
 }

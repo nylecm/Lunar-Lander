@@ -243,6 +243,7 @@ GameObject:
   - component: {fileID: 184046224}
   - component: {fileID: 184046226}
   - component: {fileID: 184046225}
+  - component: {fileID: 184046227}
   m_Layer: 0
   m_Name: Power-Up Spawn
   m_TagString: Untagged
@@ -259,7 +260,7 @@ Transform:
   m_GameObject: {fileID: 184046223}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -8.484057, y: -2.4951515, z: 4114.4287}
-  m_LocalScale: {x: 4, y: 4, z: 2}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 247694247}
   m_RootOrder: 8
@@ -305,7 +306,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.8156863}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8156863}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -325,12 +326,24 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.14
+--- !u!114 &184046227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184046223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4723ff94381247ef903d1b96750eb506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &201049036
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,6 +355,7 @@ GameObject:
   - component: {fileID: 201049037}
   - component: {fileID: 201049039}
   - component: {fileID: 201049038}
+  - component: {fileID: 201049040}
   m_Layer: 0
   m_Name: Power-Up Spawn
   m_TagString: Untagged
@@ -358,7 +372,7 @@ Transform:
   m_GameObject: {fileID: 201049036}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 14.465942, y: -6.385151, z: 4114.4287}
-  m_LocalScale: {x: 4, y: 4, z: 2}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 247694247}
   m_RootOrder: 4
@@ -404,7 +418,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.8156863}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8156863}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -424,12 +438,24 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.14
+--- !u!114 &201049040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201049036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4723ff94381247ef903d1b96750eb506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &201395739
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,7 +683,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 247694247}
-  - component: {fileID: 247694246}
   m_Layer: 0
   m_Name: Power-Up Spawners
   m_TagString: Untagged
@@ -665,18 +690,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &247694246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 247694245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eee7f23b7a292504baf0a77daf927928, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &247694247
 Transform:
   m_ObjectHideFlags: 0
@@ -820,6 +833,7 @@ GameObject:
   - component: {fileID: 268578793}
   - component: {fileID: 268578795}
   - component: {fileID: 268578794}
+  - component: {fileID: 268578796}
   m_Layer: 0
   m_Name: Power-Up Spawn
   m_TagString: Untagged
@@ -836,7 +850,7 @@ Transform:
   m_GameObject: {fileID: 268578792}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 26.265942, y: -4.105151, z: 4114.4287}
-  m_LocalScale: {x: 4, y: 4, z: 2}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 247694247}
   m_RootOrder: 6
@@ -882,7 +896,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.8156863}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8156863}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -902,12 +916,24 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.14
+--- !u!114 &268578796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268578792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4723ff94381247ef903d1b96750eb506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &345924398
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,6 +1573,7 @@ GameObject:
   - component: {fileID: 585346135}
   - component: {fileID: 585346137}
   - component: {fileID: 585346136}
+  - component: {fileID: 585346138}
   m_Layer: 0
   m_Name: Power-Up Spawn
   m_TagString: Untagged
@@ -1563,7 +1590,7 @@ Transform:
   m_GameObject: {fileID: 585346134}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 8.695942, y: 0.8648491, z: 4114.4287}
-  m_LocalScale: {x: 4, y: 4, z: 2}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 247694247}
   m_RootOrder: 3
@@ -1609,7 +1636,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.8156863}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8156863}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1629,12 +1656,24 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.14
+--- !u!114 &585346138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585346134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4723ff94381247ef903d1b96750eb506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &652801451
 GameObject:
   m_ObjectHideFlags: 0
@@ -1755,6 +1794,7 @@ GameObject:
   - component: {fileID: 744707524}
   - component: {fileID: 744707526}
   - component: {fileID: 744707525}
+  - component: {fileID: 744707527}
   m_Layer: 0
   m_Name: Power-Up Spawn
   m_TagString: Untagged
@@ -1771,7 +1811,7 @@ Transform:
   m_GameObject: {fileID: 744707523}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -10.164058, y: 4.364849, z: 4114.4287}
-  m_LocalScale: {x: 4, y: 4, z: 2}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 247694247}
   m_RootOrder: 1
@@ -1817,7 +1857,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.8156863}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8156863}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1837,12 +1877,24 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.14
+--- !u!114 &744707527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744707523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4723ff94381247ef903d1b96750eb506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &799013802
 GameObject:
   m_ObjectHideFlags: 0
@@ -2455,6 +2507,7 @@ GameObject:
   - component: {fileID: 1138811693}
   - component: {fileID: 1138811695}
   - component: {fileID: 1138811694}
+  - component: {fileID: 1138811696}
   m_Layer: 0
   m_Name: Power-Up Spawn
   m_TagString: Untagged
@@ -2471,7 +2524,7 @@ Transform:
   m_GameObject: {fileID: 1138811692}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.5040581, y: -6.715151, z: 4114.4287}
-  m_LocalScale: {x: 4, y: 4, z: 2}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 247694247}
   m_RootOrder: 2
@@ -2517,7 +2570,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.8156863}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8156863}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2537,12 +2590,24 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.14
+--- !u!114 &1138811696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138811692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4723ff94381247ef903d1b96750eb506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1161980108
 GameObject:
   m_ObjectHideFlags: 0
@@ -4013,6 +4078,7 @@ GameObject:
   - component: {fileID: 1570213871}
   - component: {fileID: 1570213873}
   - component: {fileID: 1570213872}
+  - component: {fileID: 1570213874}
   m_Layer: 0
   m_Name: Power-Up Spawn
   m_TagString: Untagged
@@ -4029,7 +4095,7 @@ Transform:
   m_GameObject: {fileID: 1570213870}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.3159418, y: 6.5548496, z: 4114.4287}
-  m_LocalScale: {x: 4, y: 4, z: 2}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 247694247}
   m_RootOrder: 7
@@ -4075,7 +4141,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.8156863}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8156863}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4095,12 +4161,24 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.14
+--- !u!114 &1570213874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570213870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4723ff94381247ef903d1b96750eb506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1585630461
 GameObject:
   m_ObjectHideFlags: 0
@@ -4262,6 +4340,7 @@ GameObject:
   - component: {fileID: 1633174100}
   - component: {fileID: 1633174102}
   - component: {fileID: 1633174101}
+  - component: {fileID: 1633174103}
   m_Layer: 0
   m_Name: Power-Up Spawn
   m_TagString: Untagged
@@ -4278,7 +4357,7 @@ Transform:
   m_GameObject: {fileID: 1633174099}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 23.115942, y: 3.274849, z: 4114.4287}
-  m_LocalScale: {x: 4, y: 4, z: 2}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 247694247}
   m_RootOrder: 5
@@ -4324,7 +4403,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.8156863}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8156863}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4344,12 +4423,24 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.14
+--- !u!114 &1633174103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633174099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4723ff94381247ef903d1b96750eb506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1645330868
 GameObject:
   m_ObjectHideFlags: 0
@@ -4809,6 +4900,7 @@ GameObject:
   - component: {fileID: 2065809014}
   - component: {fileID: 2065809016}
   - component: {fileID: 2065809015}
+  - component: {fileID: 2065809017}
   m_Layer: 0
   m_Name: Power-Up Spawn
   m_TagString: Untagged
@@ -4825,7 +4917,7 @@ Transform:
   m_GameObject: {fileID: 2065809013}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -18.904058, y: -0.14515114, z: 4114.4287}
-  m_LocalScale: {x: 4, y: 4, z: 2}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 247694247}
   m_RootOrder: 0
@@ -4871,7 +4963,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.8156863}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8156863}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4891,12 +4983,24 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.14
+--- !u!114 &2065809017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065809013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4723ff94381247ef903d1b96750eb506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2079278062
 GameObject:
   m_ObjectHideFlags: 0

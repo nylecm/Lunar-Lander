@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 
 /**
  * I am implementing a Lunar Lander Game.
@@ -106,6 +107,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+        
         float deltaTime = Time.deltaTime;
         float adjustedRotationIncrement = _rotIncrement * deltaTime;
         float adjustedThrustVelocityIncrement = _thrustVelocityIncrement * Time.deltaTime;

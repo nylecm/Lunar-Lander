@@ -1,5 +1,9 @@
 public struct CentreMessage
 {
+    public string MSG { get; }
+    public double Points { get; }
+    public string SceneToLoad { get; }
+
     public CentreMessage(string msg, int points, string sceneToLoad)
     {
         MSG = msg;
@@ -13,7 +17,7 @@ public struct CentreMessage
         Points = points;
         SceneToLoad = null;
     }
-    
+
     public CentreMessage(string msg)
     {
         MSG = msg;
@@ -21,12 +25,8 @@ public struct CentreMessage
         SceneToLoad = null;
     }
 
-    public string MSG { get; }
-    public double Points { get; }
-    public string SceneToLoad { get; }
-
     public override string ToString()
     {
-        return $"{nameof(MSG)}: {MSG}, {nameof(Points)}: {Points}, {nameof(SceneToLoad)}: {SceneToLoad}";
+        return $"{MSG}\nPoints: {Points}";
     }
 }

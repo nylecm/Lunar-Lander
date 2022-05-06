@@ -2574,7 +2574,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1148048684}
+      - m_Target: {fileID: 747661984}
         m_TargetAssemblyTypeName: ProfileSummaryController, Assembly-CSharp
         m_MethodName: PlayGame
         m_Mode: 1
@@ -2767,7 +2767,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1148048684}
+      - m_Target: {fileID: 72428576}
         m_TargetAssemblyTypeName: ProfileSummaryController, Assembly-CSharp
         m_MethodName: PlayGame
         m_Mode: 1

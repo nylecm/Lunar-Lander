@@ -57,6 +57,8 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log(ProfileManager.CurProfile.ID);
+        Debug.Log(ProfileManager.CurProfile.HighScore);
         _lander = LanderManager.GetCurLander();
         if (_lander == null)
         {
@@ -274,7 +276,7 @@ public class Player : MonoBehaviour
         HandleGameFailure();
     }
 
-    private void HandleGameFailure() // TODO fixme bug when rocket bounces on landing. Maybe use a queue of some kind.
+    private void HandleGameFailure()
     {
         if (ProfileManager.CurProfile.HighScore < _points)
         {

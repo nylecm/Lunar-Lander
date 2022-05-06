@@ -14,10 +14,12 @@ public class CollisionDetector : MonoBehaviour
             if (col.gameObject.GetComponent<PowerUpDot>().PowerUpType == PowerUpType.FUEL)
             {
                 SendMessageUpwards("HandleFuelPowerUp");
+                col.gameObject.GetComponent<PowerUpDot>().enabled = false;
             }
             else if (col.gameObject.GetComponent<PowerUpDot>().PowerUpType == PowerUpType.STOP)
             {
                 SendMessageUpwards("HandleStopPowerUp");
+                col.gameObject.GetComponent<PowerUpDot>().enabled = false;
             }
         }
         else

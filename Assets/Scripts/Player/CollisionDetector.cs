@@ -11,12 +11,12 @@ public class CollisionDetector : MonoBehaviour
     {
         if (col.gameObject.GetComponent<PowerUpDot>() != null)
         {
-            if (col.gameObject.GetComponent<PowerUpDot>().PowerUpType == PowerUpType.FUEL)
+            if (col.gameObject.GetComponent<PowerUpDot>().PowerUpType == PowerUpType.FUEL && col.gameObject.GetComponent<PowerUpDot>().enabled)
             {
                 SendMessageUpwards("HandleFuelPowerUp");
                 col.gameObject.GetComponent<PowerUpDot>().enabled = false;
             }
-            else if (col.gameObject.GetComponent<PowerUpDot>().PowerUpType == PowerUpType.STOP)
+            else if (col.gameObject.GetComponent<PowerUpDot>().PowerUpType == PowerUpType.STOP && col.gameObject.GetComponent<PowerUpDot>().enabled)
             {
                 SendMessageUpwards("HandleStopPowerUp");
                 col.gameObject.GetComponent<PowerUpDot>().enabled = false;

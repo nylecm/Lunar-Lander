@@ -1,6 +1,5 @@
 using System;
 using JetBrains.Annotations;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;

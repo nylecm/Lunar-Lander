@@ -13,7 +13,7 @@ public static class LanderManager
     
     public static LanderModel MakeLander(string landerFileName)
     {
-        return AssetDatabase.LoadAssetAtPath<LanderModel>("Assets/Landers/" + landerFileName + ".asset");    
+        return Resources.Load<LanderModel>("Landers/" + landerFileName + ".asset");
     }
 
     public static LanderModel GetCurLander()
